@@ -471,8 +471,8 @@ class PlayerSelector extends Phaser.Scene{
         SelP7 = this.add.sprite(400, 500, 'player3').setInteractive();
         SelP8 = this.add.sprite(500, 500, 'player4').setInteractive();
 
-        ready1Text = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', { fontSize: '15px', fill: '#000' });
-        ready2Text = this.add.text(200, 40, 'Jugador 2 pendiente de elegir personaje', { fontSize: '15px', fill: '#000' });
+        ready1Text = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        ready2Text = this.add.text(200, 40, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
     }
     update (){    
         //Change color of characters
@@ -864,12 +864,12 @@ class GameScene extends Phaser.Scene{
         graphics = this.add.graphics({ x: 0, y: 0 });
     
         //Game texts
-        player1LifeText = this.add.text(200, 32, 'Vida 1: 6', { fontSize: '15px', fill: '#000' });
-        player2LifeText = this.add.text(200, 48, 'Vida 2: 6', { fontSize: '15px', fill: '#000' });
-        player1AmmoText = this.add.text(200, 64, 'Munición 1: 5', { fontSize: '15px', fill: '#000' });
-        player2AmmoText = this.add.text(200, 80, 'Munición 2: 5', { fontSize: '15px', fill: '#000' });
-        player1ScoreText = this.add.text(200, 96, 'Puntos 1: 0', { fontSize: '15px', fill: '#000' });
-        player2ScoreText = this.add.text(200, 112, 'Puntos 2: 0', { fontSize: '15px', fill: '#000' });
+        player1LifeText = this.add.text(200, 32, 'Vida 1: 6', {fontFamily: 'Essential',  fontSize: '15px', fill: '#000' });
+        player2LifeText = this.add.text(200, 48, 'Vida 2: 6', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        player1AmmoText = this.add.text(200, 64, 'Munición 1: 5', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        player2AmmoText = this.add.text(200, 80, 'Munición 2: 5', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        player1ScoreText = this.add.text(200, 96, 'Puntos 1: 0', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        player2ScoreText = this.add.text(200, 112, 'Puntos 2: 0', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
         
         //Input Events
         cursors = this.input.keyboard.createCursorKeys();
