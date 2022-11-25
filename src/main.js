@@ -28,10 +28,10 @@ var player1Life = 6;
 var player2Life = 6;
 var player1Ammo = 5;
 var player2Ammo = 5;
-var player1LifeText;
-var player2LifeText;
-var player1AmmoText;
-var player2AmmoText;
+//var player1LifeText;
+//var player2LifeText;
+//var player1AmmoText;
+//var player2AmmoText;
 var player1AbleToShoot = true;
 var player2AbleToShoot = true;
 var player1Cadence = 2000;
@@ -62,6 +62,14 @@ var timeOver = false;
 var graphics;
 var timerEvent1;
 var clockSize = 25;
+var corazonesPlayer1;
+var corazonesPlayer2;
+var balasPlayer1;
+var balasPlayer2;
+var noun1;
+var noun2;
+var noun3;
+var noun4;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -74,8 +82,21 @@ function BulletPlayer1Hit(player2, player1Bullet){
     player2Life = player2Life - player1BulletDamage;
     player1BulletDamage = 1;
     player1Score = player1Score + 1;
-    player2LifeText.setText('Vida 2: ' + player2Life);
-    player1ScoreText.setText('Puntos 1: ' + player1Score);
+    //player2LifeText.setText('Vida 2: ' + player2Life);
+    player1ScoreText.setText(player1Score);
+    if(player2Life == 5){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon5').setScale(0.05);
+    }else if(player2Life == 4){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon4').setScale(0.05);
+    }else if(player2Life == 3){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon3').setScale(0.05);
+    }else if(player2Life == 2){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon2').setScale(0.05);
+    }else if(player2Life == 1){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon1').setScale(0.05);
+    }else if(player2Life == 0){
+        corazonesPlayer2 = this.add.image(974,30, 'corazon0').setScale(0.05);
+    }
 }
 
 //Player 2 bullets hits on player 1
@@ -88,8 +109,21 @@ function BulletPlayer2Hit(player1, player2Bullet){
     player1Life = player1Life - player2BulletDamage;
     player2BulletDamage = 1;
     player2Score = player2Score + 1;
-    player1LifeText.setText('Vida 1: ' + player1Life);
-    player2ScoreText.setText('Puntos 2: ' + player2Score);
+   // player1LifeText.setText('Vida 1: ' + player1Life);
+    player2ScoreText.setText(player2Score);
+    if(player1Life == 5){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon5').setScale(0.05);
+    }else if(player1Life == 4){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon4').setScale(0.05);
+    }else if(player1Life == 3){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon3').setScale(0.05);
+    }else if(player1Life == 2){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon2').setScale(0.05);
+    }else if(player1Life == 1){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon1').setScale(0.05);
+    }else if(player1Life == 0){
+        corazonesPlayer1 = this.add.image(50,30, 'corazon0').setScale(0.05);
+    }
 }
 
 //Enable player 1 to shoot after 2 seconds
@@ -116,8 +150,9 @@ function endGameByTime() {
 function addAmmo1(player1, ammo){
     console.log('ammo');
     ammo.destroy();
-    player1Ammo += 5;
-    player1AmmoText.setText('Munición 1: ' + player1Ammo);
+    player1Ammo = 5;
+    balasPlayer1 = this.add.image(230,30,'municion5').setScale(0.1);
+    //player1AmmoText.setText('Munición 1: ' + player1Ammo);
     this.time.delayedCall(10000, generateAmmo, [], this); 
 }
 
@@ -125,8 +160,9 @@ function addAmmo1(player1, ammo){
 function addAmmo2(player2, ammo){
     console.log('ammo');
     ammo.destroy();
-    player2Ammo += 5;
-    player2AmmoText.setText('Munición 2: ' + player2Ammo);
+    player2Ammo = 5;
+    balasPlayer2 = this.add.image(800,30,'municion5').setScale(0.1);
+    //player2AmmoText.setText('Munición 2: ' + player2Ammo);
     this.time.delayedCall(10000, generateAmmo, [], this); 
 }
 
@@ -135,18 +171,52 @@ function addAmmo2(player2, ammo){
 function addHealth1(player1, health){
     console.log('health');
     health.destroy();
-    player1Life += 1;
-    player1LifeText.setText('Vida 1: ' + player1Life);
-    this.time.delayedCall(5000, generateObject, [], this); 
+    this.time.delayedCall(5000, generateObject, [], this);
+    if(player1Life < 6){
+        player1Life += 1;
+        //player1LifeText.setText('Vida 1: ' + player1Life);
+        if(player1Life == 6){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon6').setScale(0.05);
+        }else if(player1Life == 5){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon5').setScale(0.05);
+        }else if(player1Life == 4){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon4').setScale(0.05);
+        }else if(player1Life == 3){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon3').setScale(0.05);
+        }else if(player1Life == 2){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon2').setScale(0.05);
+        }else if(player1Life == 1){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon1').setScale(0.05);
+        }else if(player1Life == 0){
+            corazonesPlayer1 = this.add.image(50,30, 'corazon0').setScale(0.05);
+        }
+    }
 }
 
 //Add health to player 2
 function addHealth2(player2, health){
     console.log('health');
     health.destroy();
-    player2Life += 1;
-    player2LifeText.setText('Vida 2: ' + player2Life);
     this.time.delayedCall(5000, generateObject, [], this); 
+    if(player2Life < 6){
+        player2Life += 1;
+        //player2LifeText.setText('Vida 2: ' + player2Life);
+        if(player2Life == 6){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon6').setScale(0.05);
+        }else if(player2Life == 5){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon5').setScale(0.05);
+        }else if(player2Life == 4){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon4').setScale(0.05);
+        }else if(player2Life == 3){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon3').setScale(0.05);
+        }else if(player2Life == 2){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon2').setScale(0.05);
+        }else if(player2Life == 1){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon1').setScale(0.05);
+        }else if(player2Life == 0){
+            corazonesPlayer2 = this.add.image(974,30, 'corazon0').setScale(0.05);
+        }
+    }
 }
 
 
@@ -252,7 +322,7 @@ function addPoint1(player1, point){
     console.log('point');
     point.destroy();
     player1Score = player1Score + 1;
-    player1ScoreText.setText('Puntos 1: ' + player1Score);
+    player1ScoreText.setText(player1Score);
     this.time.delayedCall(5000, generateObject, [], this); 
 }
 
@@ -261,7 +331,7 @@ function addPoint2(player2, point){
     console.log('point');
     point.destroy();
     player2Score = player2Score + 1;
-    player2ScoreText.setText('Puntos 2: ' + player2Score);
+    player2ScoreText.setText(player2Score);
     this.time.delayedCall(5000, generateObject, [], this); 
 }
     
@@ -443,7 +513,7 @@ class MainScene extends Phaser.Scene{
     }
 }
 
-///////////////////////////////////PLAYER 1 CHARACTER SELECTOR///////////////////////////////////
+///////////////////////////////////PLAYER CHARACTER SELECTOR///////////////////////////////////
 class PlayerSelector extends Phaser.Scene{
     constructor() {
 		super({ key: 'PlayerSelector' });
@@ -451,10 +521,10 @@ class PlayerSelector extends Phaser.Scene{
 
     preload(){
         this.load.image('background', 'assets/sky.png');
-        this.load.spritesheet('player1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
-        this.load.spritesheet('player2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.spritesheet('player3', 'assets/player3.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.spritesheet('player4', 'assets/player4.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
+        this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
     }
 
     create(){
@@ -462,17 +532,19 @@ class PlayerSelector extends Phaser.Scene{
         this.add.image(400, 300, 'background');
 
         //Add the characters
-        SelP1 = this.add.sprite(200, 300, 'player1').setInteractive();
-        SelP2 = this.add.sprite(300, 300, 'player2').setInteractive();
-        SelP3 = this.add.sprite(400, 300, 'player3').setInteractive();
-        SelP4 = this.add.sprite(500, 300, 'player4').setInteractive();
-        SelP5 = this.add.sprite(200, 500, 'player1').setInteractive();
-        SelP6 = this.add.sprite(300, 500, 'player2').setInteractive();
-        SelP7 = this.add.sprite(400, 500, 'player3').setInteractive();
-        SelP8 = this.add.sprite(500, 500, 'player4').setInteractive();
+        SelP1 = this.add.sprite(200, 200, 'player1').setInteractive().setScale(4);
+        SelP2 = this.add.sprite(400, 200, 'player2').setInteractive().setScale(4);
+        SelP3 = this.add.sprite(600, 200, 'player3').setInteractive().setScale(4);
+        SelP4 = this.add.sprite(800, 200, 'player4').setInteractive().setScale(4);
+        SelP5 = this.add.sprite(200, 470, 'player1').setInteractive().setScale(4);
+        SelP6 = this.add.sprite(400, 470, 'player2').setInteractive().setScale(4);
+        SelP7 = this.add.sprite(600, 470, 'player3').setInteractive().setScale(4);
+        SelP8 = this.add.sprite(800, 470, 'player4').setInteractive().setScale(4);
 
-        ready1Text = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
-        ready2Text = this.add.text(200, 40, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+        noun1 = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
+
+        ready1Text = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
+        ready2Text = this.add.text(200, 40, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
     }
     update (){    
         //Change color of characters
@@ -604,6 +676,21 @@ class GameScene extends Phaser.Scene{
         this.load.image('small', 'assets/municion.png');
         this.load.image('point', 'assets/municion.png');
         this.load.image('cadence', 'assets/municion.png');
+        this.load.image('corazon6', 'assets/corazon6.png');
+        this.load.image('corazon5', 'assets/corazon5.png');
+        this.load.image('corazon4', 'assets/corazon4.png');
+        this.load.image('corazon3', 'assets/corazon3.png');
+        this.load.image('corazon2', 'assets/corazon2.png');
+        this.load.image('corazon1', 'assets/corazon1.png');
+        this.load.image('corazon0', 'assets/corazon0.png');
+        this.load.image('puntosPlayer1', 'assets/puntos1.png');
+        this.load.image('puntosPlayer2', 'assets/puntos2.png');
+        this.load.image('municion0', 'assets/munición0.png');
+        this.load.image('municion1', 'assets/munición1.png');
+        this.load.image('municion2', 'assets/munición2.png');
+        this.load.image('municion3', 'assets/munición3.png');
+        this.load.image('municion4', 'assets/munición4.png');
+        this.load.image('municion5', 'assets/munición5.png');
     }
 
     create () {
@@ -613,17 +700,25 @@ class GameScene extends Phaser.Scene{
         //Add the platforms
         platforms = this.physics.add.staticGroup();
        
-        platforms.create(100, 120, 'ground');
-        platforms.create(924, 120, 'ground');
-        platforms.create(512, 120, 'ground');
-        platforms.create(312, 240, 'ground');
-        platforms.create(712, 240, 'ground');
-        platforms.create(200, 360, 'ground');
-        platforms.create(824, 360, 'ground');
-        platforms.create(100, 480, 'ground');
-        platforms.create(924, 480, 'ground');
-        platforms.create(350, 480, 'ground');
-        platforms.create(674, 480, 'ground');
+        platforms.create(100, 170, 'ground');
+        platforms.create(924, 170, 'ground');
+        platforms.create(512, 170, 'ground');
+        platforms.create(312, 290, 'ground');
+        platforms.create(712, 290, 'ground');
+        platforms.create(200, 410, 'ground');
+        platforms.create(824, 410, 'ground');
+        platforms.create(100, 530, 'ground');
+        platforms.create(924, 530, 'ground');
+        platforms.create(350, 530, 'ground');
+        platforms.create(674, 530, 'ground');
+
+        corazonesPlayer1 = this.add.image(50,30, 'corazon6').setScale(0.05);
+        this.add.image(130,30,'puntosPlayer1').setScale(0.05);
+        balasPlayer1 = this.add.image(230,30,'municion5').setScale(0.1);
+
+        corazonesPlayer2 = this.add.image(974,30, 'corazon6').setScale(0.05);
+        this.add.image(870,30,'puntosPlayer2').setScale(0.05);
+        balasPlayer2 = this.add.image(800,30,'municion5').setScale(0.1);
 
         //Player 1 creation
         if(player1 === 'character1'){
@@ -864,12 +959,12 @@ class GameScene extends Phaser.Scene{
         graphics = this.add.graphics({ x: 0, y: 0 });
     
         //Game texts
-        player1LifeText = this.add.text(200, 32, 'Vida 1: 6', {fontFamily: 'Essential',  fontSize: '15px', fill: '#000' });
-        player2LifeText = this.add.text(200, 48, 'Vida 2: 6', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
-        player1AmmoText = this.add.text(200, 64, 'Munición 1: 5', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
-        player2AmmoText = this.add.text(200, 80, 'Munición 2: 5', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
-        player1ScoreText = this.add.text(200, 96, 'Puntos 1: 0', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
-        player2ScoreText = this.add.text(200, 112, 'Puntos 2: 0', { fontFamily: 'Essential', fontSize: '15px', fill: '#000' });
+       // player1LifeText = this.add.text(200, 32, 'Vida 1: 6', {fontFamily: 'aplhbeta',  fontSize: '15px', fill: '#000' });
+       // player2LifeText = this.add.text(200, 48, 'Vida 2: 6', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
+        //player1AmmoText = this.add.text(200, 64, 'Munición 1: 5', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
+        //player2AmmoText = this.add.text(200, 80, 'Munición 2: 5', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
+        player1ScoreText = this.add.text(150, 20, '0', { fontFamily: 'aplhbeta', fontSize: '25px', fill: '#fff' });
+        player2ScoreText = this.add.text(895, 20, '0', { fontFamily: 'aplhbeta', fontSize: '25px', fill: '#fff' });
         
         //Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -968,7 +1063,20 @@ class GameScene extends Phaser.Scene{
         this.input.keyboard.on("keyup_Q", () => {
             if (player1AbleToShoot == true && player1Ammo > 0){
                 player1Ammo = player1Ammo - 1;
-                player1AmmoText.setText('Munición 1: ' + player1Ammo);
+                //player1AmmoText.setText('Munición 1: ' + player1Ammo);
+                if(player1Ammo == 5){
+                    balasPlayer1 = this.add.image(230,30,'municion5').setScale(0.1);
+                }else if(player1Ammo == 4){
+                    balasPlayer1 = this.add.image(230,30,'municion4').setScale(0.1);
+                }else if(player1Ammo == 3){
+                    balasPlayer1 = this.add.image(230,30,'municion3').setScale(0.1);
+                }else if(player1Ammo == 2){
+                    balasPlayer1 = this.add.image(230,30,'municion2').setScale(0.1);
+                }else if(player1Ammo == 1){
+                    balasPlayer1 = this.add.image(230,30,'municion1').setScale(0.1);
+                }else if(player1Ammo == 0){
+                    balasPlayer1 = this.add.image(230,30,'municion0').setScale(0.1);
+                }
                 player1Bullet = this.physics.add.image(player1.body.x + 15, player1.body.y + 20, 'bullet').setScale(0.5);
                 if (p1LookingLeft == true){
                     player1Bullet.setVelocityX(-2000);
@@ -1020,7 +1128,20 @@ class GameScene extends Phaser.Scene{
         this.input.keyboard.on("keyup_U", () => {
             if(player2AbleToShoot == true && player2Ammo > 0){
                 player2Ammo = player2Ammo - 1;
-                player2AmmoText.setText('Munición 2: ' + player2Ammo);
+                //player2AmmoText.setText('Munición 2: ' + player2Ammo);
+                if(player2Ammo == 5){
+                    balasPlayer2 = this.add.image(800,30,'municion5').setScale(0.1);
+                }else if(player2Ammo == 4){
+                    balasPlayer2 = this.add.image(800,30,'municion4').setScale(0.1);
+                }else if(player2Ammo == 3){
+                    balasPlayer2 = this.add.image(800,30,'municion3').setScale(0.1);
+                }else if(player2Ammo == 2){
+                    balasPlayer2 = this.add.image(800,30,'municion2').setScale(0.1);
+                }else if(player2Ammo == 1){
+                    balasPlayer2 = this.add.image(800,30,'municion1').setScale(0.1);
+                }else if(player2Ammo == 0){
+                    balasPlayer2 = this.add.image(800,30,'municion0').setScale(0.1);
+                }
                 player2Bullet = this.physics.add.image(player2.body.x + 15, player2.body.y + 20, 'bullet').setScale(0.5);
                 if (p2LookingLeft == true){
                     player2Bullet.setVelocityX(-2000);
@@ -1046,7 +1167,7 @@ class GameScene extends Phaser.Scene{
         if (createObject == true){
             createObject = false;
             randomNumber = Phaser.Math.FloatBetween(0, 10);
-            //randomNumber = 10;
+            //randomNumber = 2;
             console.log(randomNumber);
             if (randomNumber >= 0 && randomNumber <= 2){ //Generate Health
                 health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(0.2);
