@@ -66,10 +66,7 @@ var corazonesPlayer1;
 var corazonesPlayer2;
 var balasPlayer1;
 var balasPlayer2;
-var noun1;
-var noun2;
-var noun3;
-var noun4;
+var noun;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -541,10 +538,23 @@ class PlayerSelector extends Phaser.Scene{
         SelP7 = this.add.sprite(600, 470, 'player3').setInteractive().setScale(4);
         SelP8 = this.add.sprite(800, 470, 'player4').setInteractive().setScale(4);
 
-        noun1 = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
+        noun = this.add.text(30, 100, 'Jugador 1', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(30, 370, 'Jugador 2', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
 
-        ready1Text = this.add.text(200, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
-        ready2Text = this.add.text(200, 40, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '15px', fill: '#000' });
+        noun = this.add.text(140, 300, 'DAVROS', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(140, 570, 'DAVROS', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+
+        noun = this.add.text(365, 300, 'EZRI', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(365, 570, 'EZRI', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+
+        noun = this.add.text(550, 300, 'DUSKY', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(550, 570, 'DUSKY', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+
+        noun = this.add.text(750, 300, 'ZAMASU', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(750, 570, 'ZAMASU', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+
+        ready1Text = this.add.text(290, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        ready2Text = this.add.text(290, 55, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
     }
     update (){    
         //Change color of characters
@@ -565,25 +575,25 @@ class PlayerSelector extends Phaser.Scene{
         SelP1.on('pointerdown', function (pointer) {
 			player1 = 'character1';
             player1HasSelected = true;
-            ready1Text.setText('Jugador 1 listo con: ' + player1);
+            ready1Text.setText('Jugador 1 listo con: DAVROS');
 		});
 
 		SelP2.on('pointerdown', function (pointer) {
 			player1 = 'character2';
             player1HasSelected = true;
-            ready1Text.setText('Jugador 1 listo con: ' + player1);
+            ready1Text.setText('Jugador 1 listo con: EZRI');
 		});
 
 		SelP3.on('pointerdown', function (pointer) {
 			player1 = 'character3';
             player1HasSelected = true;
-            ready1Text.setText('Jugador 1 listo con: ' + player1);
+            ready1Text.setText('Jugador 1 listo con: DUSKY');
 		});
 
 		SelP4.on('pointerdown', function (pointer) {
 			player1 = 'character4';
             player1HasSelected = true;
-            ready1Text.setText('Jugador 1 listo con: ' + player1);
+            ready1Text.setText('Jugador 1 listo con: ZAMASU');
 		});
 
 
@@ -591,26 +601,26 @@ class PlayerSelector extends Phaser.Scene{
         SelP5.on('pointerdown', function (pointer) {
 			player2 = 'character1';
             player2HasSelected = true;
-            ready2Text.setText('Jugador 2 listo con: ' + player2);
+            ready2Text.setText('Jugador 2 listo con: DAVROS');
 		});
 
 		SelP6.on('pointerdown', function (pointer) {
 			player2 = 'character2';
             player2HasSelected = true;
-            ready2Text.setText('Jugador 2 listo con: ' + player2);
+            ready2Text.setText('Jugador 2 listo con: EZRI');
 		});
 
 		SelP7.on('pointerdown', function (pointer) {
 			player2 = 'character3';
             player2HasSelected = true;
-            ready2Text.setText('Jugador 2 listo con: ' + player2);
+            ready2Text.setText('Jugador 2 listo con: DUSKY');
 		});
 
 		SelP8.on('pointerdown', function (pointer) {
 			player2 = 'character4';
 
             player2HasSelected = true;
-            ready2Text.setText('Jugador 2 listo con: ' + player2);
+            ready2Text.setText('Jugador 2 listo con: ZAMASU');
 		});
 
         if(player2HasSelected == true && player1HasSelected == true){
@@ -666,7 +676,7 @@ class GameScene extends Phaser.Scene{
         this.load.spritesheet('SpritePlayer2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('SpritePlayer3', 'assets/player3.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('SpritePlayer4', 'assets/player4.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('bullet', 'assets/laserBlue02.png');
+        this.load.image('bullet', 'assets/bala.png');
         this.load.image('ammo', 'assets/municion.png');
         this.load.image('health', 'assets/municion.png');
         this.load.image('velocity', 'assets/municion.png');
@@ -977,7 +987,7 @@ class GameScene extends Phaser.Scene{
 
     update (){
         graphics.clear();
-        drawClock(512, 50, timerEvent1);
+        drawClock(512, 35, timerEvent1);
 
         //End game by time
         if(timeOver == true){
@@ -1077,7 +1087,7 @@ class GameScene extends Phaser.Scene{
                 }else if(player1Ammo == 0){
                     balasPlayer1 = this.add.image(230,30,'municion0').setScale(0.1);
                 }
-                player1Bullet = this.physics.add.image(player1.body.x + 15, player1.body.y + 20, 'bullet').setScale(0.5);
+                player1Bullet = this.physics.add.image(player1.body.x + 15, player1.body.y + 20, 'bullet').setScale(0.7);
                 if (p1LookingLeft == true){
                     player1Bullet.setVelocityX(-2000);
                 }else if (p1LookingRight == true){
@@ -1142,7 +1152,7 @@ class GameScene extends Phaser.Scene{
                 }else if(player2Ammo == 0){
                     balasPlayer2 = this.add.image(800,30,'municion0').setScale(0.1);
                 }
-                player2Bullet = this.physics.add.image(player2.body.x + 15, player2.body.y + 20, 'bullet').setScale(0.5);
+                player2Bullet = this.physics.add.image(player2.body.x + 15, player2.body.y + 20, 'bullet').setScale(0.7);
                 if (p2LookingLeft == true){
                     player2Bullet.setVelocityX(-2000);
                 }else if (p2LookingRight == true){
