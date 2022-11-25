@@ -67,6 +67,8 @@ var corazonesPlayer2;
 var balasPlayer1;
 var balasPlayer2;
 var noun;
+var musicaFondo;
+var activarMusica = true;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -469,6 +471,7 @@ function drawClock (x, y, timer)
     graphics.closePath();
 }
 
+
 ///////////////////////////////////MAIN SCENE///////////////////////////////////
 class MainScene extends Phaser.Scene{
     constructor() {
@@ -479,9 +482,43 @@ class MainScene extends Phaser.Scene{
         this.load.image('background', 'assets/sky.png');
         this.load.image('PlayButton', 'assets/JUGAR boton.png');
         this.load.image('ControlButton', 'assets/JUGAR boton.png');
+        this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
     }
 
     create(){
+        musicaFondo = this.sound.add('musicaFondo', { loop: false });
+        
+       
+        this.input.on('pointerup', function (pointer) {
+
+            if (pointer.leftButtonReleased()&&activarMusica==true)
+            {
+                activarMusica = false;
+                musicaFondo.play();
+            }
+            else if (pointer.rightButtonReleased()&&activarMusica==true)
+            {
+                activarMusica = false;
+                musicaFondo.play();
+            }
+            else if (pointer.middleButtonReleased()&&activarMusica==true)
+            {
+                activarMusica = false;
+                musicaFondo.play();
+            }
+            else if (pointer.backButtonReleased()&&activarMusica==true)
+            {
+                activarMusica = false;
+                musicaFondo.play();
+            }
+            else if (pointer.forwardButtonReleased()&&activarMusica==true)
+            {
+                activarMusica = false;
+                musicaFondo.play();
+            }
+    
+        });
+
         //Add the background
         this.add.image(400, 300, 'background');
 
@@ -495,6 +532,10 @@ class MainScene extends Phaser.Scene{
         playButton.setInteractive();
         playButton.once('pointerdown', () => {
             //this.scene.start('Player1Selector')
+            if(activarMusica==true){
+                musicaFondo.play();
+            }
+            activarMusica = false;
             this.scene.start('PlayerSelector')
         });
         this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
@@ -504,10 +545,16 @@ class MainScene extends Phaser.Scene{
         controlButton.setOrigin(0);
         controlButton.setInteractive();
         controlButton.once('pointerdown', () => {
+            if(activarMusica==true){
+                musicaFondo.play();
+            }
+            activarMusica = false;
             this.scene.start('Controls')
         });
         this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(controlButton);
+
     }
+
 }
 
 ///////////////////////////////////PLAYER CHARACTER SELECTOR///////////////////////////////////
@@ -522,6 +569,7 @@ class PlayerSelector extends Phaser.Scene{
         this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
+        
     }
 
     create(){
@@ -641,7 +689,7 @@ class Controls extends Phaser.Scene{
         this.load.image('BackButton', 'assets/JUGAR boton.png');
     }
 
-    create(){
+    create(){ 
         //Add the background
         this.add.image(400, 300, 'background');
 
