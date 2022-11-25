@@ -479,9 +479,9 @@ class MainScene extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/sky.png');
-        this.load.image('PlayButton', 'assets/JUGAR boton.png');
-        this.load.image('ControlButton', 'assets/JUGAR boton.png');
+        this.load.image('background', 'assets/fondo.png');
+        this.load.image('PlayButton', 'assets/BotonJugar.png');
+        this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
     }
 
@@ -520,7 +520,7 @@ class MainScene extends Phaser.Scene{
         });
 
         //Add the background
-        this.add.image(400, 300, 'background');
+        this.add.image(512, 320, 'background');
 
         //Add the buttons
         this.add.sprite(500, 300, 'PlayButton').setScale(0.5);
@@ -564,7 +564,7 @@ class PlayerSelector extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/sky.png');
+        this.load.image('background', 'assets/fondo.png');
         this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
@@ -574,7 +574,7 @@ class PlayerSelector extends Phaser.Scene{
 
     create(){
         //Add the background
-        this.add.image(400, 300, 'background');
+        this.add.image(512, 320, 'background');
 
         //Add the characters
         SelP1 = this.add.sprite(200, 200, 'player1').setInteractive().setScale(4);
@@ -586,25 +586,27 @@ class PlayerSelector extends Phaser.Scene{
         SelP7 = this.add.sprite(600, 470, 'player3').setInteractive().setScale(4);
         SelP8 = this.add.sprite(800, 470, 'player4').setInteractive().setScale(4);
 
-        noun = this.add.text(30, 100, 'Jugador 1', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        noun = this.add.text(30, 370, 'Jugador 2', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(55, 100, 'Jugador 1', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(55, 370, 'Jugador 2', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(140, 300, 'DAVROS', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        noun = this.add.text(140, 570, 'DAVROS', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(150, 300, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(150, 570, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(365, 300, 'EZRI', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        noun = this.add.text(365, 570, 'EZRI', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(370, 300, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(370, 570, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(550, 300, 'DUSKY', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        noun = this.add.text(550, 570, 'DUSKY', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(565, 300, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(565, 570, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(750, 300, 'ZAMASU', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        noun = this.add.text(750, 570, 'ZAMASU', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        noun = this.add.text(760, 300, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(760, 570, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        ready1Text = this.add.text(290, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
-        ready2Text = this.add.text(290, 55, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'alphbeta', fontSize: '30px', fill: '#000' });
+        ready1Text = this.add.text(270, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+        ready2Text = this.add.text(270, 65, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+        
     }
     update (){    
+       
         //Change color of characters
 		this.input.on('gameobjectover', function (pointer, gameObject) {
 			gameObject.setTint(0x00ff00);
@@ -685,13 +687,13 @@ class Controls extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/sky.png');
-        this.load.image('BackButton', 'assets/JUGAR boton.png');
+        this.load.image('background', 'assets/fondo.png');
+        this.load.image('BackButton', 'assets/BotonVolver.png');
     }
 
     create(){ 
         //Add the background
-        this.add.image(400, 300, 'background');
+        this.add.image(512, 320, 'background');
 
         //Add the buttons
         this.add.sprite(500, 500, 'BackButton').setScale(0.3);
@@ -718,8 +720,8 @@ class GameScene extends Phaser.Scene{
 	}
     
     preload () {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ground', 'assets/platform.png');
+        this.load.image('sky', 'assets/fondo.png');
+        this.load.image('ground', 'assets/platformP.png');
         this.load.spritesheet('SpritePlayer1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('SpritePlayer2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('SpritePlayer3', 'assets/player3.png', { frameWidth: 32, frameHeight: 48 });
@@ -753,7 +755,7 @@ class GameScene extends Phaser.Scene{
 
     create () {
         //Add the background
-        this.add.image(400, 300, 'sky');
+        this.add.image(512, 320, 'sky');
 
         //Add the platforms
         platforms = this.physics.add.staticGroup();
@@ -1010,17 +1012,12 @@ class GameScene extends Phaser.Scene{
         }
 
         //Timer 
-		//timerText = this.add.text(200, 16, 'Tiempo: ', { fontSize: '15px', fill: '#000' });
 		timedEvent = this.time.delayedCall(120000, endGameByTime, [], this);
         
         timerEvent1 = this.time.addEvent({ delay: 120000, timeScale: 1 });
         graphics = this.add.graphics({ x: 0, y: 0 });
     
         //Game texts
-       // player1LifeText = this.add.text(200, 32, 'Vida 1: 6', {fontFamily: 'aplhbeta',  fontSize: '15px', fill: '#000' });
-       // player2LifeText = this.add.text(200, 48, 'Vida 2: 6', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
-        //player1AmmoText = this.add.text(200, 64, 'Munición 1: 5', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
-        //player2AmmoText = this.add.text(200, 80, 'Munición 2: 5', { fontFamily: 'aplhbeta', fontSize: '15px', fill: '#000' });
         player1ScoreText = this.add.text(150, 20, '0', { fontFamily: 'aplhbeta', fontSize: '25px', fill: '#fff' });
         player2ScoreText = this.add.text(895, 20, '0', { fontFamily: 'aplhbeta', fontSize: '25px', fill: '#fff' });
         
@@ -1079,9 +1076,6 @@ class GameScene extends Phaser.Scene{
 			this.physics.pause();
 			this.time.delayedCall(2000, endGame, [], this);
         }
-
-        //Timer
-        //timerText.setText('Tiempo: ' + (120 - ((timedEvent.getProgress() * 120).toString().substr(0, 2))));
 
         //Player 1 controls
         this.input.keyboard.on("keydown_A", () => {
@@ -1300,13 +1294,13 @@ class CreditsScene extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/sky.png');
+        this.load.image('background', 'assets/fondo.png');
         this.load.image('PlayButton', 'assets/JUGAR boton.png');
     }
 
     create(){
         //Add the background
-        this.add.image(400, 300, 'background');
+        this.add.image(512, 320, 'background');
 
         //Add the buttons
         this.add.sprite(500, 300, 'PlayButton').setScale(0.5);
