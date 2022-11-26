@@ -70,10 +70,15 @@ var noun;
 var musicaFondo;
 var activarMusica = true;
 var resultado;
+var musicaJuego;
+var efectoMuerte;
+var efectoRecolector;
+var efectoDisparo;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
 function BulletPlayer1Hit(player2, player1Bullet){
+    efectoMuerte.play();
     player2.setVelocityX(0);
     player2.setVelocityY(0);
     player2.x = 924;
@@ -101,6 +106,7 @@ function BulletPlayer1Hit(player2, player1Bullet){
 
 //Player 2 bullets hits on player 1
 function BulletPlayer2Hit(player1, player2Bullet){
+    efectoMuerte.play();
     player1.setVelocityX(0);
     player1.setVelocityY(0);
     player1.x = 100;
@@ -138,6 +144,7 @@ function enablePlayer2Shoot(){
 
 //End game by time
 function endGame() {
+    musicaJuego.stop();
     this.scene.start('CreditsScene');
 }
 
@@ -148,6 +155,7 @@ function endGameByTime() {
 
 //Add ammo to player 1
 function addAmmo1(player1, ammo){
+    efectoRecolector.play();
     console.log('ammo');
     ammo.destroy();
     player1Ammo = 5;
@@ -158,6 +166,7 @@ function addAmmo1(player1, ammo){
 
 //Add ammo to player 2
 function addAmmo2(player2, ammo){
+    efectoRecolector.play();
     console.log('ammo');
     ammo.destroy();
     player2Ammo = 5;
@@ -169,6 +178,7 @@ function addAmmo2(player2, ammo){
 
 //Add health to player 1
 function addHealth1(player1, health){
+    efectoRecolector.play();
     console.log('health');
     health.destroy();
     this.time.delayedCall(5000, generateObject, [], this);
@@ -195,6 +205,7 @@ function addHealth1(player1, health){
 
 //Add health to player 2
 function addHealth2(player2, health){
+    efectoRecolector.play();
     console.log('health');
     health.destroy();
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -222,6 +233,7 @@ function addHealth2(player2, health){
 
 //Add velocity to player 1
 function addVelocity1(player1, velocity){
+    efectoRecolector.play();
     console.log('velocity');
     velocity.destroy();
     player1VelocityX = 320;
@@ -232,6 +244,7 @@ function addVelocity1(player1, velocity){
 
 //Add velocity to player 2
 function addVelocity2(player2, velocity){
+    efectoRecolector.play();
     console.log('velocity');
     velocity.destroy();
     player2VelocityX = 320;
@@ -243,6 +256,7 @@ function addVelocity2(player2, velocity){
 
 //Add damage to player 1
 function addDamage1(player1, damage){
+    efectoRecolector.play();
     console.log('damage');
     damage.destroy();
     player1BulletDamage = 3;
@@ -251,6 +265,7 @@ function addDamage1(player1, damage){
 
 //Add damage to player 2
 function addDamage2(player2, damage){
+    efectoRecolector.play();
     console.log('damage');
     damage.destroy();
     player2BulletDamage = 3;
@@ -260,6 +275,7 @@ function addDamage2(player2, damage){
 
 //Add slow to player 1
 function addSlow1(player1, slow){
+    efectoRecolector.play();
     console.log('slow');
     slow.destroy();
     player2VelocityX = 80;
@@ -270,6 +286,7 @@ function addSlow1(player1, slow){
 
 //Add slow to player 2
 function addSlow2(player2, slow){
+    efectoRecolector.play();
     console.log('slow');
     slow.destroy();
     player1VelocityX = 80;
@@ -281,6 +298,7 @@ function addSlow2(player2, slow){
 
 //Add big to player 1
 function addBig1(player1, big){
+    efectoRecolector.play();
     console.log('big');
     big.destroy();
     player2.setScale(1.5);
@@ -290,6 +308,7 @@ function addBig1(player1, big){
 
 //Add big to player 2
 function addBig2(player2, big){
+    efectoRecolector.play();
     console.log('big');
     big.destroy();
     player1.setScale(1.5);
@@ -300,6 +319,7 @@ function addBig2(player2, big){
 
 //Add small to player 1
 function addSmall1(player1, small){
+    efectoRecolector.play();
     console.log('small');
     small.destroy();
     player1.setScale(0.5);
@@ -309,6 +329,7 @@ function addSmall1(player1, small){
 
 //Add small to player 2
 function addSmall2(player2, small){
+    efectoRecolector.play();
     console.log('small');
     small.destroy();
     player2.setScale(0.5);
@@ -319,6 +340,7 @@ function addSmall2(player2, small){
 
 //Add point to player 1
 function addPoint1(player1, point){
+    efectoRecolector.play();
     console.log('point');
     point.destroy();
     player1Score = player1Score + 1;
@@ -328,6 +350,7 @@ function addPoint1(player1, point){
 
 //Add point to player 2
 function addPoint2(player2, point){
+    efectoRecolector.play();
     console.log('point');
     point.destroy();
     player2Score = player2Score + 1;
@@ -338,6 +361,7 @@ function addPoint2(player2, point){
 
 //Add cadence to player 1
 function addCadence1(player1, cadence){
+    efectoRecolector.play();
     console.log('cadence');
     cadence.destroy();
     player1Cadence = 500;
@@ -347,6 +371,7 @@ function addCadence1(player1, cadence){
 
 //Add cadence to player 2
 function addCadence2(player2, cadence){
+    efectoRecolector.play();
     console.log('cadence');
     cadence.destroy();
     player2Cadence = 500;
@@ -399,6 +424,7 @@ function restoreCadence2(){
 
 //Start Game
 function startGame(){
+    musicaFondo.stop();
     this.scene.start('GameScene');
 }
 
@@ -488,7 +514,6 @@ class MainScene extends Phaser.Scene{
 
     create(){
         musicaFondo = this.sound.add('musicaFondo', { loop: false });
-        
        
         this.input.on('pointerup', function (pointer) {
 
@@ -744,9 +769,22 @@ class GameScene extends Phaser.Scene{
         this.load.image('municion3', 'assets/munición3.png');
         this.load.image('municion4', 'assets/munición4.png');
         this.load.image('municion5', 'assets/munición5.png');
+        this.load.image('suelo', 'assets/platform.png');
+        this.load.audio('musicaJuego', 'assets/music/m_acción1.mp3');
+        this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
+        this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
+        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
     }
 
     create () {
+        
+        musicaJuego = this.sound.add('musicaJuego', { loop: true });
+        musicaJuego.play();
+
+        efectoMuerte = this.sound.add('efectoMuerte', { loop: false });
+        efectoDisparo = this.sound.add('efectoDisparo', { loop: false });
+        efectoRecolector = this.sound.add('efectoRecolector', { loop: false });
+
         //Add the background
         this.add.image(512, 320, 'sky');
 
@@ -764,6 +802,9 @@ class GameScene extends Phaser.Scene{
         platforms.create(924, 530, 'ground');
         platforms.create(350, 530, 'ground');
         platforms.create(674, 530, 'ground');
+        platforms.create(100, 635, 'suelo');
+        platforms.create(500, 635, 'suelo');
+        platforms.create(900, 635, 'suelo');
 
         corazonesPlayer1 = this.add.image(50,30, 'corazon6').setScale(0.05);
         this.add.image(130,30,'puntosPlayer1').setScale(0.05);
@@ -1090,19 +1131,19 @@ class GameScene extends Phaser.Scene{
         //End game by life
         if (player1Life <= 0 || player2Life <= 0) {
             if (player1Life <= 0){
-                player1.setScale(3);
-                player1.x = 512;
-                player1.y = 320;
-                player2.x = 2000;
-                player2.y = 2000;
-                resultado = 'j1';
-            }else if(player2Life <= 0){
                 player2.setScale(3);
                 player2.x = 512;
                 player2.y = 320;
                 player1.x = 2000;
                 player1.y = 2000;
                 resultado = 'j2';
+            }else if(player2Life <= 0){
+                player1.setScale(3);
+                player1.x = 512;
+                player1.y = 320;
+                player2.x = 2000;
+                player2.y = 2000;
+                resultado = 'j1';
             }else{
                 player1.setScale(3);
                 player2.setScale(3);
@@ -1154,6 +1195,7 @@ class GameScene extends Phaser.Scene{
         //Player 1 actions
         this.input.keyboard.on("keyup_Q", () => {
             if (player1AbleToShoot == true && player1Ammo > 0){
+                efectoDisparo.play();
                 player1Ammo = player1Ammo - 1;
                 //player1AmmoText.setText('Munición 1: ' + player1Ammo);
                 if(player1Ammo == 5){
@@ -1219,6 +1261,7 @@ class GameScene extends Phaser.Scene{
         //Player 2 actions
         this.input.keyboard.on("keyup_U", () => {
             if(player2AbleToShoot == true && player2Ammo > 0){
+                efectoDisparo.play();
                 player2Ammo = player2Ammo - 1;
                 //player2AmmoText.setText('Munición 2: ' + player2Ammo);
                 if(player2Ammo == 5){
@@ -1336,13 +1379,14 @@ class CreditsScene extends Phaser.Scene{
     preload(){
         this.load.image('fondoCredit', 'assets/fondoMenu.png');
         this.load.image('botonMP', 'assets/BotonMP.png');
-        this.load.image('victoriaJ1', 'assets/victoriaJ1.png');
-        this.load.image('victoriaJ2', 'assets/victoriaJ2.png');
+        this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
+        this.load.image('victoriaJ1', 'assets/victoriaJ2.png');
         this.load.image('empate', 'assets/empate.png');
         this.load.image('autores', 'assets/Autores.png');
     }
 
     create(){
+        musicaFondo.play();
         //Add the background
         this.add.image(512, 320, 'fondoCredit');
 
@@ -1364,6 +1408,8 @@ class CreditsScene extends Phaser.Scene{
          playButton.setOrigin(0);
          playButton.setInteractive();
          playButton.once('pointerdown', () => {
+            musicaFondo.stop();
+            activarMusica = true;
              this.scene.start('MainScene')
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
