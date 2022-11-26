@@ -69,6 +69,7 @@ var balasPlayer2;
 var noun;
 var musicaFondo;
 var activarMusica = true;
+var resultado;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -479,7 +480,7 @@ class MainScene extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/fondo.png');
+        this.load.image('fondoMain', 'assets/fondoPrincipal.png');
         this.load.image('PlayButton', 'assets/BotonJugar.png');
         this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
@@ -520,14 +521,10 @@ class MainScene extends Phaser.Scene{
         });
 
         //Add the background
-        this.add.image(512, 320, 'background');
-
-        //Add the buttons
-        this.add.sprite(500, 300, 'PlayButton').setScale(0.5);
-		this.add.sprite(500, 500, 'ControlButton').setScale(0.3);
+        this.add.image(512, 320, 'fondoMain');
 
         //Add interactions with the buttons - Go to play Scene
-        var playButton = this.add.zone(350, 240, 300, 110);
+        var playButton = this.add.zone(610, 100, 340, 160);
         playButton.setOrigin(0);
         playButton.setInteractive();
         playButton.once('pointerdown', () => {
@@ -538,10 +535,10 @@ class MainScene extends Phaser.Scene{
             activarMusica = false;
             this.scene.start('PlayerSelector')
         });
-        this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
+        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
 
         //Add interactions with the buttons - Go to controls scene
-        var controlButton = this.add.zone(400, 450, 220, 90);
+        var controlButton = this.add.zone(640, 440, 280, 140);
         controlButton.setOrigin(0);
         controlButton.setInteractive();
         controlButton.once('pointerdown', () => {
@@ -551,7 +548,7 @@ class MainScene extends Phaser.Scene{
             activarMusica = false;
             this.scene.start('Controls')
         });
-        this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(controlButton);
+        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(controlButton);
 
     }
 
@@ -564,7 +561,7 @@ class PlayerSelector extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/fondo.png');
+        this.load.image('fondoCharacter', 'assets/fondoMenu.png');
         this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
@@ -574,7 +571,7 @@ class PlayerSelector extends Phaser.Scene{
 
     create(){
         //Add the background
-        this.add.image(512, 320, 'background');
+        this.add.image(512, 320, 'fondoCharacter');
 
         //Add the characters
         SelP1 = this.add.sprite(200, 200, 'player1').setInteractive().setScale(4);
@@ -687,25 +684,21 @@ class Controls extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/fondo.png');
-        this.load.image('BackButton', 'assets/BotonVolver.png');
+        this.load.image('fondoControl', 'assets/fondoTuto.png');
     }
 
     create(){ 
         //Add the background
-        this.add.image(512, 320, 'background');
-
-        //Add the buttons
-        this.add.sprite(500, 500, 'BackButton').setScale(0.3);
+        this.add.image(512, 320, 'fondoControl');
 
         //Add interactions with the buttons - Go back to Main Scene
-        var backButton = this.add.zone(400, 450, 220, 90);
+        var backButton = this.add.zone(830, 500, 180, 90);
         backButton.setOrigin(0);
         backButton.setInteractive();
         backButton.once('pointerdown', () => {
             this.scene.start('MainScene')
         });
-        this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
     }
 }
 
@@ -1037,12 +1030,27 @@ class GameScene extends Phaser.Scene{
         //End game by time
         if(timeOver == true){
             if (player1Score > player2Score){
-                player1.setScale(2);
+                player1.setScale(3);
+                player1.x = 512;
+                player1.y = 320;
+                player2.x = 2000;
+                player2.y = 2000;
+                resultado = 'j1';
             }else if(player1Score < player2Score){
-                player2.setScale(2);
+                player2.setScale(3);
+                player2.x = 512;
+                player2.y = 320;
+                player1.x = 2000;
+                player1.y = 2000;
+                resultado = 'j2';
             }else{
                 player1.setScale(2);
                 player2.setScale(2);
+                player1.x = 312;
+                player1.y = 320;
+                player2.x = 712;
+                player2.y = 320;
+                resultado = 'empate';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1052,11 +1060,27 @@ class GameScene extends Phaser.Scene{
         //End game by score
         if (player1Score == 10 || player2Score == 10) {
             if (player1Score > player2Score){
-                //Add event for player 1 win
+                player1.setScale(3);
+                player1.x = 512;
+                player1.y = 320;
+                player2.x = 2000;
+                player2.y = 2000;
+                resultado = 'j1';
             }else if(player1Score < player2Score){
-                //Add event for player 2 win
+                player2.setScale(3);
+                player2.x = 512;
+                player2.y = 320;
+                player1.x = 2000;
+                player1.y = 2000;
+                resultado = 'j2';
             }else{
-                //Add event for tie
+                player1.setScale(3);
+                player2.setScale(3);
+                player1.x = 312;
+                player1.y = 320;
+                player2.x = 712;
+                player2.y = 320;
+                resultado = 'empate';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1066,11 +1090,27 @@ class GameScene extends Phaser.Scene{
         //End game by life
         if (player1Life <= 0 || player2Life <= 0) {
             if (player1Life <= 0){
-                //Add event for player 2 win
+                player1.setScale(3);
+                player1.x = 512;
+                player1.y = 320;
+                player2.x = 2000;
+                player2.y = 2000;
+                resultado = 'j1';
             }else if(player2Life <= 0){
-                //Add event for player 1 win
+                player2.setScale(3);
+                player2.x = 512;
+                player2.y = 320;
+                player1.x = 2000;
+                player1.y = 2000;
+                resultado = 'j2';
             }else{
-                //Add event for tie
+                player1.setScale(3);
+                player2.setScale(3);
+                player1.x = 312;
+                player1.y = 320;
+                player2.x = 712;
+                player2.y = 320;
+                resultado = 'empate';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1294,25 +1334,39 @@ class CreditsScene extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('background', 'assets/fondo.png');
-        this.load.image('PlayButton', 'assets/JUGAR boton.png');
+        this.load.image('fondoCredit', 'assets/fondoMenu.png');
+        this.load.image('botonMP', 'assets/BotonMP.png');
+        this.load.image('victoriaJ1', 'assets/victoriaJ1.png');
+        this.load.image('victoriaJ2', 'assets/victoriaJ2.png');
+        this.load.image('empate', 'assets/empate.png');
+        this.load.image('autores', 'assets/Autores.png');
     }
 
     create(){
         //Add the background
-        this.add.image(512, 320, 'background');
+        this.add.image(512, 320, 'fondoCredit');
+
+        if(resultado === 'j1'){
+            this.add.image(512, 160, 'victoriaJ1');
+        }else if(resultado === 'j2'){
+            this.add.image(512, 160, 'victoriaJ2');
+        }else if(resultado === 'empate'){
+            this.add.image(512, 160, 'empate');
+        }
+
+        this.add.image(512, 320, 'autores');
 
         //Add the buttons
-        this.add.sprite(500, 300, 'PlayButton').setScale(0.5);
+        this.add.sprite(840, 500, 'botonMP');
 
          //Add interactions with the buttons - Go to play Scene
-         var playButton = this.add.zone(350, 240, 300, 110);
+         var playButton = this.add.zone(670, 420, 340, 160);
          playButton.setOrigin(0);
          playButton.setInteractive();
          playButton.once('pointerdown', () => {
              this.scene.start('MainScene')
          });
-         this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
+         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
     }
 }
 
