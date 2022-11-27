@@ -499,6 +499,142 @@ function drawClock (x, y, timer)
     graphics.closePath();
 }
 
+///////////////////////////////////LOADING SCENE///////////////////////////////////
+class Preload extends Phaser.Scene{
+    constructor() {
+		super({ key: 'Preload' });
+	}
+    preload() {
+        //Main
+        this.load.image('fondoMain', 'assets/fondoPrincipal.png');
+        this.load.image('PlayButton', 'assets/BotonJugar.png');
+        this.load.image('ControlButton', 'assets/BotonAjustes.png');
+        this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
+        this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
+
+        //Selector
+        this.load.image('fondoCharacter', 'assets/fondoMenu.png');
+        this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
+        this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
+
+        //Controles
+        this.load.image('fondoControl', 'assets/fondoTuto.png');
+
+        //Juego
+        this.load.image('sky', 'assets/fondo.png');
+        this.load.image('ground', 'assets/platformP.png');
+        this.load.spritesheet('SpritePlayer1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
+        this.load.spritesheet('SpritePlayer2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('SpritePlayer3', 'assets/player3.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('SpritePlayer4', 'assets/player4.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.image('bullet', 'assets/bala.png');
+        this.load.image('ammo', 'assets/ammo.png');
+        this.load.image('health', 'assets/health.png');
+        this.load.image('velocity', 'assets/velocity.png');
+        this.load.image('damage', 'assets/damage.png');
+        this.load.image('slow', 'assets/slow.png');
+        this.load.image('big', 'assets/big.png');
+        this.load.image('small', 'assets/small.png');
+        this.load.image('point', 'assets/point.png');
+        this.load.image('cadence', 'assets/cadence.png');
+        this.load.image('corazon6', 'assets/corazon6.png');
+        this.load.image('corazon5', 'assets/corazon5.png');
+        this.load.image('corazon4', 'assets/corazon4.png');
+        this.load.image('corazon3', 'assets/corazon3.png');
+        this.load.image('corazon2', 'assets/corazon2.png');
+        this.load.image('corazon1', 'assets/corazon1.png');
+        this.load.image('corazon0', 'assets/corazon0.png');
+        this.load.image('puntosPlayer1', 'assets/puntos1.png');
+        this.load.image('puntosPlayer2', 'assets/puntos2.png');
+        this.load.image('municion0', 'assets/munición0.png');
+        this.load.image('municion1', 'assets/munición1.png');
+        this.load.image('municion2', 'assets/munición2.png');
+        this.load.image('municion3', 'assets/munición3.png');
+        this.load.image('municion4', 'assets/munición4.png');
+        this.load.image('municion5', 'assets/munición5.png');
+        this.load.image('suelo', 'assets/platform.png');
+        this.load.audio('musicaJuego', 'assets/music/m_acción1.mp3');
+        this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
+        this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
+        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
+
+        //Creditos
+        this.load.image('botonMP', 'assets/BotonMP.png');
+        this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
+        this.load.image('victoriaJ1', 'assets/victoriaJ2.png');
+        this.load.image('empate', 'assets/empate.png');
+        this.load.image('autores', 'assets/Autores.png');
+
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        progressBox.fillStyle(0x222222, 0.8);
+        progressBox.fillRect(360, 270, 320, 50);
+        
+        var width = this.cameras.main.width;
+        var height = this.cameras.main.height;
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 80,
+            text: 'Loading...',
+            style: {
+                font: '20px monospace',
+                fill: '#ffffff'
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+        
+        var percentText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 25,
+            text: '0%',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+        percentText.setOrigin(0.5, 0.5);
+        
+        var assetText = this.make.text({
+            x: width / 2,
+            y: height / 2 + 50,
+            text: '',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+        assetText.setOrigin(0.5, 0.5);
+        
+        this.load.on('progress', function (value) {
+            percentText.setText(parseInt(value * 100) + '%');
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect(370, 280, 300 * value, 30);
+        });
+        
+        this.load.on('fileprogress', function (file) {
+            assetText.setText('Loading asset: ' + file.key);
+        });
+        this.load.on('complete', function () {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+            assetText.destroy();
+        });
+        
+        this.load.image('logo');
+        for (var i = 0; i < 1; i++) {
+            this.load.image('logo'+i);
+        }
+    }
+
+    create() {
+        this.scene.start('MainScene')
+    }
+}
 
 ///////////////////////////////////MAIN SCENE///////////////////////////////////
 class MainScene extends Phaser.Scene{
@@ -507,11 +643,67 @@ class MainScene extends Phaser.Scene{
 	}
 
     preload(){
+        /*//Main
         this.load.image('fondoMain', 'assets/fondoPrincipal.png');
         this.load.image('PlayButton', 'assets/BotonJugar.png');
         this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
         this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
+
+        //Selector
+        this.load.image('fondoCharacter', 'assets/fondoMenu.png');
+        this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
+        this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
+
+        //Controles
+        this.load.image('fondoControl', 'assets/fondoTuto.png');
+
+        //Juego
+        this.load.image('sky', 'assets/fondo.png');
+        this.load.image('ground', 'assets/platformP.png');
+        this.load.spritesheet('SpritePlayer1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
+        this.load.spritesheet('SpritePlayer2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('SpritePlayer3', 'assets/player3.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('SpritePlayer4', 'assets/player4.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.image('bullet', 'assets/bala.png');
+        this.load.image('ammo', 'assets/ammo.png');
+        this.load.image('health', 'assets/health.png');
+        this.load.image('velocity', 'assets/velocity.png');
+        this.load.image('damage', 'assets/damage.png');
+        this.load.image('slow', 'assets/slow.png');
+        this.load.image('big', 'assets/big.png');
+        this.load.image('small', 'assets/small.png');
+        this.load.image('point', 'assets/point.png');
+        this.load.image('cadence', 'assets/cadence.png');
+        this.load.image('corazon6', 'assets/corazon6.png');
+        this.load.image('corazon5', 'assets/corazon5.png');
+        this.load.image('corazon4', 'assets/corazon4.png');
+        this.load.image('corazon3', 'assets/corazon3.png');
+        this.load.image('corazon2', 'assets/corazon2.png');
+        this.load.image('corazon1', 'assets/corazon1.png');
+        this.load.image('corazon0', 'assets/corazon0.png');
+        this.load.image('puntosPlayer1', 'assets/puntos1.png');
+        this.load.image('puntosPlayer2', 'assets/puntos2.png');
+        this.load.image('municion0', 'assets/munición0.png');
+        this.load.image('municion1', 'assets/munición1.png');
+        this.load.image('municion2', 'assets/munición2.png');
+        this.load.image('municion3', 'assets/munición3.png');
+        this.load.image('municion4', 'assets/munición4.png');
+        this.load.image('municion5', 'assets/munición5.png');
+        this.load.image('suelo', 'assets/platform.png');
+        this.load.audio('musicaJuego', 'assets/music/m_acción1.mp3');
+        this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
+        this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
+        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
+
+        //Creditos
+        this.load.image('botonMP', 'assets/BotonMP.png');
+        this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
+        this.load.image('victoriaJ1', 'assets/victoriaJ2.png');
+        this.load.image('empate', 'assets/empate.png');
+        this.load.image('autores', 'assets/Autores.png');*/
     }
 
     create(){
@@ -591,12 +783,11 @@ class PlayerSelector extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('fondoCharacter', 'assets/fondoMenu.png');
+        /*this.load.image('fondoCharacter', 'assets/fondoMenu.png');
         this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
-        
+        this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });*/
     }
 
     create(){
@@ -721,7 +912,7 @@ class Controls extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('fondoControl', 'assets/fondoTuto.png');
+        //this.load.image('fondoControl', 'assets/fondoTuto.png');
     }
 
     create(){ 
@@ -751,7 +942,7 @@ class GameScene extends Phaser.Scene{
 	}
     
     preload () {
-        this.load.image('sky', 'assets/fondo.png');
+       /* this.load.image('sky', 'assets/fondo.png');
         this.load.image('ground', 'assets/platformP.png');
         this.load.spritesheet('SpritePlayer1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('SpritePlayer2', 'assets/player2.png', { frameWidth: 32, frameHeight: 48 });
@@ -786,7 +977,7 @@ class GameScene extends Phaser.Scene{
         this.load.audio('musicaJuego', 'assets/music/m_acción1.mp3');
         this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
         this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
-        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
+        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');*/
     }
 
     create () {
@@ -1390,18 +1581,18 @@ class CreditsScene extends Phaser.Scene{
 	}
 
     preload(){
-        this.load.image('fondoCredit', 'assets/fondoMenu.png');
+        /*this.load.image('fondoCredit', 'assets/fondoMenu.png');
         this.load.image('botonMP', 'assets/BotonMP.png');
         this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
         this.load.image('victoriaJ1', 'assets/victoriaJ2.png');
         this.load.image('empate', 'assets/empate.png');
-        this.load.image('autores', 'assets/Autores.png');
+        this.load.image('autores', 'assets/Autores.png');*/
     }
 
     create(){
         musicaFondo.play();
         //Add the background
-        this.add.image(512, 320, 'fondoCredit');
+        this.add.image(512, 320, 'fondoCharacter');
 
         if(resultado === 'j1'){
             this.add.image(512, 160, 'victoriaJ1');
@@ -1444,7 +1635,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [MainScene, Controls, PlayerSelector, GameScene, CreditsScene],
+    scene: [Preload, MainScene, Controls, PlayerSelector, GameScene, CreditsScene],
 };
 
 var game = new Phaser.Game(config);
