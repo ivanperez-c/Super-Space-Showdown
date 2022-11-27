@@ -74,6 +74,7 @@ var musicaJuego;
 var efectoMuerte;
 var efectoRecolector;
 var efectoDisparo;
+var sonidoBoton;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -510,10 +511,12 @@ class MainScene extends Phaser.Scene{
         this.load.image('PlayButton', 'assets/BotonJugar.png');
         this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
+        this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
     }
 
     create(){
         musicaFondo = this.sound.add('musicaFondo', { loop: false });
+        sonidoBoton = this.sound.add('sonidoBoton', { loop: false });
        
         this.input.on('pointerup', function (pointer) {
 
@@ -553,6 +556,7 @@ class MainScene extends Phaser.Scene{
         playButton.setOrigin(0);
         playButton.setInteractive();
         playButton.once('pointerdown', () => {
+            sonidoBoton.play();
             //this.scene.start('Player1Selector')
             if(activarMusica==true){
                 musicaFondo.play();
@@ -567,6 +571,7 @@ class MainScene extends Phaser.Scene{
         controlButton.setOrigin(0);
         controlButton.setInteractive();
         controlButton.once('pointerdown', () => {
+            sonidoBoton.play();
             if(activarMusica==true){
                 musicaFondo.play();
             }
@@ -645,24 +650,28 @@ class PlayerSelector extends Phaser.Scene{
 
         //Player 1 choice
         SelP1.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player1 = 'character1';
             player1HasSelected = true;
             ready1Text.setText('Jugador 1 listo con: DAVROS');
 		});
 
 		SelP2.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player1 = 'character2';
             player1HasSelected = true;
             ready1Text.setText('Jugador 1 listo con: EZRI');
 		});
 
 		SelP3.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player1 = 'character3';
             player1HasSelected = true;
             ready1Text.setText('Jugador 1 listo con: DUSKY');
 		});
 
 		SelP4.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player1 = 'character4';
             player1HasSelected = true;
             ready1Text.setText('Jugador 1 listo con: ZAMASU');
@@ -671,26 +680,29 @@ class PlayerSelector extends Phaser.Scene{
 
         //Player 2 choice
         SelP5.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player2 = 'character1';
             player2HasSelected = true;
             ready2Text.setText('Jugador 2 listo con: DAVROS');
 		});
 
 		SelP6.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player2 = 'character2';
             player2HasSelected = true;
             ready2Text.setText('Jugador 2 listo con: EZRI');
 		});
 
 		SelP7.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player2 = 'character3';
             player2HasSelected = true;
             ready2Text.setText('Jugador 2 listo con: DUSKY');
 		});
 
 		SelP8.on('pointerdown', function (pointer) {
+            sonidoBoton.play();
 			player2 = 'character4';
-
             player2HasSelected = true;
             ready2Text.setText('Jugador 2 listo con: ZAMASU');
 		});
@@ -721,6 +733,7 @@ class Controls extends Phaser.Scene{
         backButton.setOrigin(0);
         backButton.setInteractive();
         backButton.once('pointerdown', () => {
+            sonidoBoton.play();
             this.scene.start('MainScene')
         });
        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
@@ -1408,6 +1421,7 @@ class CreditsScene extends Phaser.Scene{
          playButton.setOrigin(0);
          playButton.setInteractive();
          playButton.once('pointerdown', () => {
+            sonidoBoton.play();
             musicaFondo.stop();
             activarMusica = true;
              this.scene.start('MainScene')
