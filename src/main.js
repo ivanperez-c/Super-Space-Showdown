@@ -75,6 +75,12 @@ var efectoMuerte;
 var efectoRecolector;
 var efectoDisparo;
 var sonidoBoton;
+var cuentas1 = true;
+var cuentas2 = true;
+var cuentas3 = true;
+var textoCuenta;
+var textoCuenta2;
+var textoCuenta3;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -323,7 +329,7 @@ function addSmall1(player1, small){
     efectoRecolector.play();
     console.log('small');
     small.destroy();
-    player1.setScale(0.5);
+    player1.setScale(0.75);
     this.time.delayedCall(5000, generateObject, [], this); 
     this.time.delayedCall(10000, restoreSize1, [], this);
 }
@@ -333,7 +339,7 @@ function addSmall2(player2, small){
     efectoRecolector.play();
     console.log('small');
     small.destroy();
-    player2.setScale(0.5);
+    player2.setScale(0.75);
     this.time.delayedCall(5000, generateObject, [], this); 
     this.time.delayedCall(10000, restoreSize2, [], this);
 }
@@ -405,12 +411,12 @@ function restoreVelocity2(){
 
 //Restore player 1 size
 function restoreSize1(){
-    player1.setScale(1);
+    player1.setScale(1.5);
 }
 
 //Restore player 2 size
 function restoreSize2(){
-    player2.setScale(1);
+    player2.setScale(1.5);
 }
 
 //Restore player 1 cadence
@@ -499,6 +505,36 @@ function drawClock (x, y, timer)
     graphics.closePath();
 }
 
+function cuenta1(){
+    if (cuentas1 == true){
+        cuentas1 = false;
+        console.log('El juego  comienza en: 3');
+        textoCuenta3 = this.add.text(820, 300, 'El juego', { fontFamily: 'essential', fontSize: '50px', fill: '#fff' });
+        textoCuenta2 = this.add.text(790, 350, 'comienza en:', { fontFamily: 'essential', fontSize: '50px', fill: '#fff' });
+        textoCuenta = this.add.text(880, 390, '3', { fontFamily: 'essential', fontSize: '100px', fill: '#fff' });
+        this.time.delayedCall(1000, cuenta2, [], this); 
+    }
+    
+}
+
+function cuenta2(){
+    if (cuentas2 == true){
+        cuentas2 = false;
+        console.log('El juego  comienza en: 2');
+        textoCuenta.setText('2');
+        this.time.delayedCall(1000, cuenta3, [], this); 
+    }
+}
+
+function cuenta3(){
+    if(cuentas3 == true){
+        musicaFondo.stop();
+        cuentas3 = false;
+        console.log('El juego  comienza en: 1');
+        textoCuenta.setText('1');
+        this.time.delayedCall(1000, startGame, [], this); 
+    }
+}
 ///////////////////////////////////LOADING SCENE///////////////////////////////////
 class Preload extends Phaser.Scene{
     constructor() {
@@ -561,6 +597,7 @@ class Preload extends Phaser.Scene{
         this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
         this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
         this.load.image('pantallaCreditos', 'assets/pantallaCreditos.png');
+        this.load.image('pausa', 'assets/pausa.png');
         
         //Creditos
         this.load.image('botonMP', 'assets/BotonMP.png');
@@ -781,29 +818,29 @@ class PlayerSelector extends Phaser.Scene{
         this.add.image(512, 320, 'fondoCharacter');
 
         //Add the characters
-        SelP1 = this.add.sprite(200, 200, 'player1').setInteractive().setScale(4);
-        SelP2 = this.add.sprite(400, 200, 'player2').setInteractive().setScale(4);
-        SelP3 = this.add.sprite(600, 200, 'player3').setInteractive().setScale(4);
-        SelP4 = this.add.sprite(800, 200, 'player4').setInteractive().setScale(4);
-        SelP5 = this.add.sprite(200, 470, 'player1').setInteractive().setScale(4);
-        SelP6 = this.add.sprite(400, 470, 'player2').setInteractive().setScale(4);
-        SelP7 = this.add.sprite(600, 470, 'player3').setInteractive().setScale(4);
-        SelP8 = this.add.sprite(800, 470, 'player4').setInteractive().setScale(4);
+        SelP1 = this.add.sprite(100, 200, 'player1').setInteractive().setScale(3);
+        SelP2 = this.add.sprite(300, 200, 'player2').setInteractive().setScale(3);
+        SelP3 = this.add.sprite(500, 200, 'player3').setInteractive().setScale(3);
+        SelP4 = this.add.sprite(700, 200, 'player4').setInteractive().setScale(3);
+        SelP5 = this.add.sprite(100, 470, 'player1').setInteractive().setScale(3);
+        SelP6 = this.add.sprite(300, 470, 'player2').setInteractive().setScale(3);
+        SelP7 = this.add.sprite(500, 470, 'player3').setInteractive().setScale(3);
+        SelP8 = this.add.sprite(700, 470, 'player4').setInteractive().setScale(3);
 
         noun = this.add.text(55, 100, 'Jugador 1', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
         noun = this.add.text(55, 370, 'Jugador 2', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(150, 300, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(150, 570, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(50, 280, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(50, 550, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(370, 300, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(370, 570, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(270, 280, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(270, 550, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(565, 300, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(565, 570, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(465, 280, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(465, 550, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
-        noun = this.add.text(760, 300, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(760, 570, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(660, 280, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
+        noun = this.add.text(660, 550, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
 
         ready1Text = this.add.text(270, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
         ready2Text = this.add.text(270, 65, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
@@ -885,7 +922,8 @@ class PlayerSelector extends Phaser.Scene{
 		});
 
         if(player2HasSelected == true && player1HasSelected == true){
-            this.time.delayedCall(3000, startGame, [], this); 
+           // this.time.delayedCall(3000, startGame, [], this); 
+           this.time.delayedCall(1000, cuenta1, [], this); 
         }
     }
 }
@@ -1075,7 +1113,7 @@ class GameScene extends Phaser.Scene{
 
         //Player 1 creation
         if(player1 === 'character1'){
-            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer1');
+            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer1').setScale(1.5);
             player1.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left1',
@@ -1103,7 +1141,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player1 === 'character2'){
-            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer2');
+            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer2').setScale(1.5);
             player1.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left1',
@@ -1131,7 +1169,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player1 === 'character3'){
-            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer3');
+            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer3').setScale(1.5);
             player1.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left1',
@@ -1159,7 +1197,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player1 === 'character4'){
-            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer4');
+            player1 = this.physics.add.sprite(100, 50, 'SpritePlayer4').setScale(1.5);
             player1.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left1',
@@ -1191,7 +1229,7 @@ class GameScene extends Phaser.Scene{
 
         //Player 2 creation
         if(player2 === 'character1'){
-            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer1');
+            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer1').setScale(1.5);
             player2.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left2',
@@ -1219,7 +1257,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player2 === 'character2'){
-            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer2');
+            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer2').setScale(1.5);
             player2.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left2',
@@ -1247,7 +1285,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player2 === 'character3'){
-            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer3');
+            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer3').setScale(1.5);
             player2.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left2',
@@ -1275,7 +1313,7 @@ class GameScene extends Phaser.Scene{
                 frameRate: 20
             });
         }else if(player2 === 'character4'){
-            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer4');
+            player2 = this.physics.add.sprite(924, 50, 'SpritePlayer4').setScale(1.5);
             player2.setCollideWorldBounds(true);
             this.anims.create({
                 key: 'left2',
@@ -1327,6 +1365,12 @@ class GameScene extends Phaser.Scene{
         graphics.clear();
         drawClock(512, 35, timerEvent1);
 
+        
+        this.input.keyboard.on("keyup_G", () => {
+            this.scene.launch('Pausa')
+            this.scene.pause();
+        });
+
         //End game by time
         if(timeOver == true){
             if (player1Score > player2Score){
@@ -1350,7 +1394,7 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'empate';
+                resultado = 'tablas';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1380,7 +1424,7 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'empate';
+                resultado = 'tablas';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1410,7 +1454,7 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'empate';
+                resultado = 'tablas';
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1425,7 +1469,7 @@ class GameScene extends Phaser.Scene{
             player1.anims.play('left1', true);
         });
         this.input.keyboard.on("keydown_S", () => {
-            player1.setScale(0.5);
+            player1.setScale(0.75);
         });
         this.input.keyboard.on("keydown_D", () => {
             p1LookingLeft = false;
@@ -1448,7 +1492,7 @@ class GameScene extends Phaser.Scene{
 			player1.anims.play('turn1');
 		});
         this.input.keyboard.on("keyup_S", () => {
-            player1.setScale(1);
+            player1.setScale(1.5);
 		});
 
         //Player 1 actions
@@ -1472,11 +1516,11 @@ class GameScene extends Phaser.Scene{
                 }
                 player1Bullet = this.physics.add.image(player1.body.x + 15, player1.body.y + 20, 'bullet').setScale(0.7);
                 if (p1LookingLeft == true){
-                    player1Bullet.setVelocityX(-2000);
+                    player1Bullet.setVelocityX(-1500);
                 }else if (p1LookingRight == true){
-                    player1Bullet.setVelocityX(2000);
+                    player1Bullet.setVelocityX(1500);
                 }else{
-                    player1Bullet.setVelocityY(-2000);
+                    player1Bullet.setVelocityY(-1500);
                 }
                 player1AbleToShoot = false;
                 this.time.delayedCall(player1Cadence, enablePlayer1Shoot, [], this);
@@ -1491,7 +1535,7 @@ class GameScene extends Phaser.Scene{
             player2.anims.play('left2', true);
         });
         this.input.keyboard.on("keydown_K", () => {
-            player2.setScale(0.5);
+            player2.setScale(0.75);
         });
         this.input.keyboard.on("keydown_L", () => {
             p2LookingLeft = false;
@@ -1514,7 +1558,7 @@ class GameScene extends Phaser.Scene{
 			player2.anims.play('turn2');
 		});
         this.input.keyboard.on("keyup_K", () => {
-            player2.setScale(1);
+            player2.setScale(1.5);
 		});
 
         //Player 2 actions
@@ -1538,11 +1582,11 @@ class GameScene extends Phaser.Scene{
                 }
                 player2Bullet = this.physics.add.image(player2.body.x + 15, player2.body.y + 20, 'bullet').setScale(0.7);
                 if (p2LookingLeft == true){
-                    player2Bullet.setVelocityX(-2000);
+                    player2Bullet.setVelocityX(-1500);
                 }else if (p2LookingRight == true){
-                    player2Bullet.setVelocityX(2000);
+                    player2Bullet.setVelocityX(1500);
                 }else{
-                    player2Bullet.setVelocityY(-2000);
+                    player2Bullet.setVelocityY(-1500);
                 }
                 player2AbleToShoot = false;
                 this.time.delayedCall(player2Cadence, enablePlayer2Shoot, [], this); 
@@ -1629,6 +1673,33 @@ class GameScene extends Phaser.Scene{
     }
 }
 
+///////////////////////////////////PAUSE SCENE///////////////////////////////////
+class Pausa extends Phaser.Scene{
+    constructor() {
+		super({ key: 'Pausa' });
+	}
+
+    preload(){
+    }
+
+    create(){
+        //Add the background
+        this.add.image(512, 320, 'pausa');
+
+         //Add interactions with the buttons - Go to play Scene
+         var reanudar = this.add.zone(280, 400, 470, 145);
+         reanudar.setOrigin(0);
+         reanudar.setInteractive();
+         reanudar.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.resume('GameScene');
+            this.scene.stop();
+         });
+         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(reanudar);
+    }
+}
+
+
 ///////////////////////////////////CREDITS SCENE///////////////////////////////////
 class CreditsScene extends Phaser.Scene{
     constructor() {
@@ -1648,7 +1719,7 @@ class CreditsScene extends Phaser.Scene{
             this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
         }else if(resultado === 'j2'){
             this.add.image(512, 160, 'victoriaJ2').setScale(0,3);
-        }else if(resultado === 'empate'){
+        }else if(resultado === 'tablas'){
             this.add.image(512, 160, 'empate').setScale(0,3);
         }
 
@@ -1671,7 +1742,6 @@ class CreditsScene extends Phaser.Scene{
     }
 }
 
-
 ///////////////////////////////////GAME CONFIG///////////////////////////////////
 var config = {
     type: Phaser.AUTO,
@@ -1685,7 +1755,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, CreditsScene],
+    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, Pausa, CreditsScene],
 };
 
 var game = new Phaser.Game(config);
