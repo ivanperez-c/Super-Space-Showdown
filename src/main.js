@@ -1594,7 +1594,7 @@ class GameScene extends Phaser.Scene{
         //Generate ammo
         if (createAmmo == true){
             createAmmo = false;
-            ammo = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'ammo').setScale(1.3);
+            ammo = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'ammo').setScale(0.8);
             ammo.setCollideWorldBounds(true)
             this.physics.add.collider(ammo, platforms);
         }
@@ -1606,42 +1606,42 @@ class GameScene extends Phaser.Scene{
             //randomNumber = 2;
             console.log(randomNumber);
             if (randomNumber >= 0 && randomNumber <= 2){ //Generate Health
-                health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(1.3);
+                health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(0.8);
                 health.setCollideWorldBounds(true)
                 this.physics.add.collider(health, platforms);
             }
             if (randomNumber > 2 && randomNumber <= 3){ //Generate Velocity
-                velocity = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'velocity').setScale(1.3);
+                velocity = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'velocity').setScale(0.8);
                 velocity.setCollideWorldBounds(true)
                 this.physics.add.collider(velocity, platforms);
             }
             if (randomNumber > 3 && randomNumber <= 4){ //Generate more damage on bullet
-                damage = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'damage').setScale(1.3);
+                damage = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'damage').setScale(0.8);
                 damage.setCollideWorldBounds(true)
                 this.physics.add.collider(damage, platforms);
             }
             if (randomNumber > 4 && randomNumber <= 5){ //Generate slow enemy
-                slow = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'slow').setScale(1.3);
+                slow = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'slow').setScale(0.8);
                 slow.setCollideWorldBounds(true)
                 this.physics.add.collider(slow, platforms);
             }
             if (randomNumber > 5 && randomNumber <= 6){ //Generate big enemy
-                big = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'big').setScale(1.3);
+                big = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'big').setScale(0.8);
                 big.setCollideWorldBounds(true)
                 this.physics.add.collider(big, platforms);
             }
             if (randomNumber > 6 && randomNumber <= 7){ //Generate small player
-                small = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'small').setScale(1.3);
+                small = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'small').setScale(0.8);
                 small.setCollideWorldBounds(true)
                 this.physics.add.collider(small, platforms);
             }
             if (randomNumber > 7 && randomNumber <= 9){ //Generate a point
-                point = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'point').setScale(1.3);
+                point = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'point').setScale(0.8);
                 point.setCollideWorldBounds(true)
                 this.physics.add.collider(point, platforms);
             }
             if (randomNumber > 9 && randomNumber <= 10){ //Generate cadence
-                cadence = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'cadence').setScale(1.3);
+                cadence = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'cadence').setScale(0.8);
                 cadence.setCollideWorldBounds(true)
                 this.physics.add.collider(cadence, platforms);
             }
