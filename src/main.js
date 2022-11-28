@@ -505,6 +505,7 @@ function drawClock (x, y, timer)
 }
 
 function cuenta1(){
+    musicaFondo.stop();
     if (cuentas1 == true){
         cuentas1 = false;
         console.log('El juego  comienza en: 3');
@@ -517,6 +518,7 @@ function cuenta1(){
 }
 
 function cuenta2(){
+    musicaFondo.stop();
     if (cuentas2 == true){
         cuentas2 = false;
         console.log('El juego  comienza en: 2');
@@ -921,11 +923,11 @@ class PlayerSelector extends Phaser.Scene{
 
         if(player2HasSelected == true && player1HasSelected == true){
            // this.time.delayedCall(3000, startGame, [], this); 
+           musicaFondo.stop();
            this.time.delayedCall(1000, cuenta1, [], this); 
         }
     }
 }
-
 
 ///////////////////////////////////TUTO POWER///////////////////////////////////
 class TutoPower extends Phaser.Scene{
@@ -1394,7 +1396,7 @@ class GameScene extends Phaser.Scene{
             }
             timedEvent.paused = true;
 			this.physics.pause();
-			this.time.delayedCall(2000, endGame, [], this);
+			this.time.delayedCall(4000, endGame, [], this);
         }
 
         //End game by score
@@ -1592,7 +1594,7 @@ class GameScene extends Phaser.Scene{
         //Generate ammo
         if (createAmmo == true){
             createAmmo = false;
-            ammo = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'ammo').setScale(0.2);
+            ammo = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'ammo').setScale(1.3);
             ammo.setCollideWorldBounds(true)
             this.physics.add.collider(ammo, platforms);
         }
@@ -1604,42 +1606,42 @@ class GameScene extends Phaser.Scene{
             //randomNumber = 2;
             console.log(randomNumber);
             if (randomNumber >= 0 && randomNumber <= 2){ //Generate Health
-                health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(0.2);
+                health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(1.3);
                 health.setCollideWorldBounds(true)
                 this.physics.add.collider(health, platforms);
             }
             if (randomNumber > 2 && randomNumber <= 3){ //Generate Velocity
-                velocity = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'velocity').setScale(0.2);
+                velocity = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'velocity').setScale(1.3);
                 velocity.setCollideWorldBounds(true)
                 this.physics.add.collider(velocity, platforms);
             }
             if (randomNumber > 3 && randomNumber <= 4){ //Generate more damage on bullet
-                damage = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'damage').setScale(0.2);
+                damage = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'damage').setScale(1.3);
                 damage.setCollideWorldBounds(true)
                 this.physics.add.collider(damage, platforms);
             }
             if (randomNumber > 4 && randomNumber <= 5){ //Generate slow enemy
-                slow = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'slow').setScale(0.2);
+                slow = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'slow').setScale(1.3);
                 slow.setCollideWorldBounds(true)
                 this.physics.add.collider(slow, platforms);
             }
             if (randomNumber > 5 && randomNumber <= 6){ //Generate big enemy
-                big = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'big').setScale(0.2);
+                big = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'big').setScale(1.3);
                 big.setCollideWorldBounds(true)
                 this.physics.add.collider(big, platforms);
             }
             if (randomNumber > 6 && randomNumber <= 7){ //Generate small player
-                small = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'small').setScale(0.2);
+                small = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'small').setScale(1.3);
                 small.setCollideWorldBounds(true)
                 this.physics.add.collider(small, platforms);
             }
             if (randomNumber > 7 && randomNumber <= 9){ //Generate a point
-                point = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'point').setScale(0.2);
+                point = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'point').setScale(1.3);
                 point.setCollideWorldBounds(true)
                 this.physics.add.collider(point, platforms);
             }
             if (randomNumber > 9 && randomNumber <= 10){ //Generate cadence
-                cadence = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'cadence').setScale(0.2);
+                cadence = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'cadence').setScale(1.3);
                 cadence.setCollideWorldBounds(true)
                 this.physics.add.collider(cadence, platforms);
             }
@@ -1683,7 +1685,18 @@ class Pausa extends Phaser.Scene{
         this.add.image(512, 320, 'pausa');
 
          //Add interactions with the buttons - Go to play Scene
-         var reanudar = this.add.zone(280, 400, 470, 145);
+         var tuto = this.add.zone(350, 310, 330, 100);
+         tuto.setOrigin(0);
+         tuto.setInteractive();
+         tuto.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('TutoPowerPausa');
+
+         });
+         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(tuto);
+
+         //Add interactions with the buttons - Go to play Scene
+         var reanudar = this.add.zone(350, 440, 330, 100);
          reanudar.setOrigin(0);
          reanudar.setInteractive();
          reanudar.once('pointerdown', () => {
@@ -1691,7 +1704,140 @@ class Pausa extends Phaser.Scene{
             this.scene.resume('GameScene');
             this.scene.stop();
          });
-         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(reanudar);
+        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(reanudar);
+    }
+}
+
+///////////////////////////////////TUTO POWER///////////////////////////////////
+class TutoPowerPausa extends Phaser.Scene{
+    constructor() {
+		super({ key: 'TutoPowerPausa' });
+	}
+
+    preload(){
+    }
+
+    create(){ 
+        //Add the background
+        this.add.image(512, 320, 'fondoTutoPower');
+
+        //Add interactions with the buttons - Go back to Main Scene
+        var backButton = this.add.zone(830, 500, 180, 90);
+        backButton.setOrigin(0);
+        backButton.setInteractive();
+        backButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('Pausa')
+        });
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoControlesPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoVictoriaPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+    }
+}
+
+///////////////////////////////////TUTO CONTROLES///////////////////////////////////
+class TutoControlesPausa extends Phaser.Scene{
+    constructor() {
+		super({ key: 'TutoControlesPausa' });
+	}
+
+    preload(){
+    }
+
+    create(){ 
+        //Add the background
+        this.add.image(512, 320, 'fondoTutoControles');
+
+        //Add interactions with the buttons - Go back to Main Scene
+        var backButton = this.add.zone(830, 500, 180, 90);
+        backButton.setOrigin(0);
+        backButton.setInteractive();
+        backButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('Pausa')
+        });
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoVictoriaPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoPowerPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+    }
+}
+
+///////////////////////////////////TUTO VICTORIA///////////////////////////////////
+class TutoVictoriaPausa extends Phaser.Scene{
+    constructor() {
+		super({ key: 'TutoVictoriaPausa' });
+	}
+
+    preload(){
+    }
+
+    create(){ 
+        //Add the background
+        this.add.image(512, 320, 'fondoTutoVictoria');
+
+        //Add interactions with the buttons - Go back to Main Scene
+        var backButton = this.add.zone(830, 500, 180, 90);
+        backButton.setOrigin(0);
+        backButton.setInteractive();
+        backButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('Pausa')
+        });
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoPowerPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoControlesPausa')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
     }
 }
 
@@ -1741,7 +1887,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, Pausa, CreditosFinales],
+    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, TutoVictoriaPausa, TutoPowerPausa, TutoControlesPausa ,Pausa, CreditosFinales],
 };
 
 var game = new Phaser.Game(config);
