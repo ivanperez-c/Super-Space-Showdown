@@ -69,7 +69,6 @@ var balasPlayer2;
 var noun;
 var musicaFondo;
 var activarMusica = true;
-var resultado;
 var musicaJuego;
 var efectoMuerte;
 var efectoRecolector;
@@ -152,7 +151,7 @@ function enablePlayer2Shoot(){
 //End game by time
 function endGame() {
     musicaJuego.stop();
-    this.scene.start('CreditsScene');
+    this.scene.start('CreditosFinales');
 }
 
 //End game by time
@@ -308,7 +307,7 @@ function addBig1(player1, big){
     efectoRecolector.play();
     console.log('big');
     big.destroy();
-    player2.setScale(1.5);
+    player2.setScale(2);
     this.time.delayedCall(5000, generateObject, [], this); 
     this.time.delayedCall(10000, restoreSize2, [], this);
 }
@@ -318,7 +317,7 @@ function addBig2(player2, big){
     efectoRecolector.play();
     console.log('big');
     big.destroy();
-    player1.setScale(1.5);
+    player1.setScale(2);
     this.time.delayedCall(5000, generateObject, [], this); 
     this.time.delayedCall(10000, restoreSize1, [], this);
 }
@@ -527,6 +526,7 @@ function cuenta2(){
 }
 
 function cuenta3(){
+    musicaFondo.stop();
     if(cuentas3 == true){
         musicaFondo.stop();
         cuentas3 = false;
@@ -544,7 +544,7 @@ class Preload extends Phaser.Scene{
         //Main
         this.load.image('fondoMain', 'assets/fondoPrincipal.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
-        this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
+        this.load.audio('sonidoBoton', 'assets/SFX/efectoBoton.mp3');
         this.load.image('logo','assets/logo.png');
 
         //Selector
@@ -593,9 +593,9 @@ class Preload extends Phaser.Scene{
         this.load.image('municion5', 'assets/munición5.png');
         this.load.image('suelo', 'assets/platform.png');
         this.load.audio('musicaJuego', 'assets/music/m_acción1.mp3');
-        this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
-        this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
-        this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
+        this.load.audio('efectoMuerte', 'assets/SFX/efectoMuerte.mp3');
+        this.load.audio('efectoDisparo', 'assets/SFX/efectoDisparo.mp3');
+        this.load.audio('efectoRecolector', 'assets/SFX/efectoRecoger.mp3');
         this.load.image('pantallaCreditos', 'assets/pantallaCreditos.png');
         this.load.image('pausa', 'assets/pausa.png');
         
@@ -1343,7 +1343,6 @@ class GameScene extends Phaser.Scene{
 
         //Timer 
 		timedEvent = this.time.delayedCall(120000, endGameByTime, [], this);
-        
         timerEvent1 = this.time.addEvent({ delay: 120000, timeScale: 1 });
         graphics = this.add.graphics({ x: 0, y: 0 });
     
@@ -1376,14 +1375,14 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 2000;
                 player2.y = 2000;
-                resultado = 'j1';
+                this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
             }else if(player1Score < player2Score){
                 player2.setScale(3);
                 player2.x = 512;
                 player2.y = 320;
                 player1.x = 2000;
                 player1.y = 2000;
-                resultado = 'j2';
+                this.add.image(512, 160, 'victoriaJ2').setScale(0.2);
             }else{
                 player1.setScale(2);
                 player2.setScale(2);
@@ -1391,7 +1390,7 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'tablas';
+                this.add.image(512, 160, 'empate').setScale(0.2);
             }
             timedEvent.paused = true;
 			this.physics.pause();
@@ -1406,14 +1405,14 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 2000;
                 player2.y = 2000;
-                resultado = 'j1';
+                this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
             }else if(player1Score < player2Score){
                 player2.setScale(3);
                 player2.x = 512;
                 player2.y = 320;
                 player1.x = 2000;
                 player1.y = 2000;
-                resultado = 'j2';
+                this.add.image(512, 160, 'victoriaJ2').setScale(0.2);
             }else{
                 player1.setScale(3);
                 player2.setScale(3);
@@ -1421,11 +1420,11 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'tablas';
+                this.add.image(512, 160, 'empate').setScale(0.2);
             }
             timedEvent.paused = true;
 			this.physics.pause();
-			this.time.delayedCall(2000, endGame, [], this);
+			this.time.delayedCall(4000, endGame, [], this);
         }
 
         //End game by life
@@ -1436,14 +1435,14 @@ class GameScene extends Phaser.Scene{
                 player2.y = 320;
                 player1.x = 2000;
                 player1.y = 2000;
-                resultado = 'j2';
+                this.add.image(512, 160, 'victoriaJ2').setScale(0.2);
             }else if(player2Life <= 0){
                 player1.setScale(3);
                 player1.x = 512;
                 player1.y = 320;
                 player2.x = 2000;
                 player2.y = 2000;
-                resultado = 'j1';
+                this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
             }else{
                 player1.setScale(3);
                 player2.setScale(3);
@@ -1451,11 +1450,11 @@ class GameScene extends Phaser.Scene{
                 player1.y = 320;
                 player2.x = 712;
                 player2.y = 320;
-                resultado = 'tablas';
+                this.add.image(512, 160, 'empate').setScale(0.2);
             }
             timedEvent.paused = true;
 			this.physics.pause();
-			this.time.delayedCall(2000, endGame, [], this);
+			this.time.delayedCall(4000, endGame, [], this);
         }
 
         //Player 1 controls
@@ -1696,11 +1695,10 @@ class Pausa extends Phaser.Scene{
     }
 }
 
-
-///////////////////////////////////CREDITS SCENE///////////////////////////////////
-class CreditsScene extends Phaser.Scene{
+///////////////////////////////////FINAL CREDITS SCENE///////////////////////////////////
+class CreditosFinales extends Phaser.Scene{
     constructor() {
-		super({ key: 'CreditsScene' });
+		super({ key: 'CreditosFinales' });
 	}
 
     preload(){
@@ -1708,17 +1706,8 @@ class CreditsScene extends Phaser.Scene{
 
     create(){
         musicaFondo.play();
-        //Add the background
-        this.add.image(512, 320, 'fondoCharacter');
+        this.add.image(512, 320, 'pantallaCreditos');
         this.add.image(510, 350, 'logo').setScale(0.2);
-
-        if(resultado === 'j1'){
-            this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
-        }else if(resultado === 'j2'){
-            this.add.image(512, 160, 'victoriaJ2').setScale(0,3);
-        }else if(resultado === 'tablas'){
-            this.add.image(512, 160, 'empate').setScale(0,3);
-        }
 
         this.add.image(512, 320, 'autores');
 
@@ -1733,7 +1722,7 @@ class CreditsScene extends Phaser.Scene{
             sonidoBoton.play();
             musicaFondo.stop();
             activarMusica = true;
-             this.scene.start('MainScene')
+            this.scene.start('MainScene');
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
     }
@@ -1752,7 +1741,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, Pausa, CreditsScene],
+    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, Pausa, CreditosFinales],
 };
 
 var game = new Phaser.Game(config);
