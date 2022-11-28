@@ -796,9 +796,7 @@ class Creditos extends Phaser.Scene{
          playButton.setInteractive();
          playButton.once('pointerdown', () => {
             sonidoBoton.play();
-            musicaFondo.stop();
-            activarMusica = true;
-             this.scene.start('MainScene')
+            this.scene.start('MainScene')
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
     }
@@ -1084,7 +1082,7 @@ class GameScene extends Phaser.Scene{
 
         //Add the background
         this.add.image(512, 320, 'sky');
-
+        
         //Add the platforms
         platforms = this.physics.add.staticGroup();
        
@@ -1097,8 +1095,9 @@ class GameScene extends Phaser.Scene{
         platforms.create(824, 410, 'ground');
         platforms.create(100, 530, 'ground');
         platforms.create(924, 530, 'ground');
-        platforms.create(350, 530, 'ground');
-        platforms.create(674, 530, 'ground');
+        platforms.create(300, 530, 'ground');
+        platforms.create(724, 530, 'ground');
+
         platforms.create(100, 635, 'suelo');
         platforms.create(500, 635, 'suelo');
         platforms.create(900, 635, 'suelo');
@@ -1358,14 +1357,12 @@ class GameScene extends Phaser.Scene{
         //Colliders - Players with the platforms
         this.physics.add.collider(player1, platforms);   
         this.physics.add.collider(player2, platforms);
-        
     }
 
     update (){
         graphics.clear();
         drawClock(512, 35, timerEvent1);
 
-        
         this.input.keyboard.on("keyup_G", () => {
             this.scene.launch('Pausa')
             this.scene.pause();
