@@ -511,6 +511,7 @@ class Preload extends Phaser.Scene{
         this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
         this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
+        this.load.image('logo','assets/logo.png');
 
         //Selector
         this.load.image('fondoCharacter', 'assets/fondoMenu.png');
@@ -648,6 +649,8 @@ class MainScene extends Phaser.Scene{
     create(){
         musicaFondo = this.sound.add('musicaFondo', { loop: false });
         sonidoBoton = this.sound.add('sonidoBoton', { loop: false });
+
+       
        
         this.input.on('pointerup', function (pointer) {
 
@@ -681,6 +684,7 @@ class MainScene extends Phaser.Scene{
 
         //Add the background
         this.add.image(512, 320, 'fondoMain');
+        this.add.image(40, 600, 'logo').setScale(0.1);
 
         //Add interactions with the buttons - Go to play Scene
         var playButton = this.add.zone(610, 100, 340, 160);
@@ -1483,6 +1487,7 @@ class CreditsScene extends Phaser.Scene{
         musicaFondo.play();
         //Add the background
         this.add.image(512, 320, 'fondoCharacter');
+        this.add.image(510, 350, 'logo').setScale(0.2);
 
         if(resultado === 'j1'){
             this.add.image(512, 160, 'victoriaJ1');
