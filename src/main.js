@@ -507,8 +507,6 @@ class Preload extends Phaser.Scene{
     preload() {
         //Main
         this.load.image('fondoMain', 'assets/fondoPrincipal.png');
-        this.load.image('PlayButton', 'assets/BotonJugar.png');
-        this.load.image('ControlButton', 'assets/BotonAjustes.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
         this.load.audio('sonidoBoton', 'assets/SFX/button.mp3');
         this.load.image('logo','assets/logo.png');
@@ -521,7 +519,9 @@ class Preload extends Phaser.Scene{
         this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
 
         //Controles
-        this.load.image('fondoControl', 'assets/fondoTuto.png');
+        this.load.image('fondoTutoVictoria', 'assets/fondoTutoVictoria.png');
+        this.load.image('fondoTutoPower', 'assets/fondoTutoPower.png');
+        this.load.image('fondoTutoControles', 'assets/fondoTutoControles.png');
 
         //Juego
         this.load.image('sky', 'assets/fondo.png');
@@ -560,7 +560,8 @@ class Preload extends Phaser.Scene{
         this.load.audio('efectoMuerte', 'assets/SFX/Death.mp3');
         this.load.audio('efectoDisparo', 'assets/SFX/Gun.mp3');
         this.load.audio('efectoRecolector', 'assets/SFX/Recarga laser.mp3');
-
+        this.load.image('pantallaCreditos', 'assets/pantallaCreditos.png');
+        
         //Creditos
         this.load.image('botonMP', 'assets/BotonMP.png');
         this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
@@ -687,7 +688,7 @@ class MainScene extends Phaser.Scene{
         this.add.image(40, 600, 'logo').setScale(0.1);
 
         //Add interactions with the buttons - Go to play Scene
-        var playButton = this.add.zone(610, 100, 340, 160);
+        var playButton = this.add.zone(640, 100, 280, 140);
         playButton.setOrigin(0);
         playButton.setInteractive();
         playButton.once('pointerdown', () => {
@@ -702,7 +703,7 @@ class MainScene extends Phaser.Scene{
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
 
         //Add interactions with the buttons - Go to controls scene
-        var controlButton = this.add.zone(640, 440, 280, 140);
+        var controlButton = this.add.zone(640, 270, 280, 140);
         controlButton.setOrigin(0);
         controlButton.setInteractive();
         controlButton.once('pointerdown', () => {
@@ -711,12 +712,59 @@ class MainScene extends Phaser.Scene{
                 musicaFondo.play();
             }
             activarMusica = false;
-            this.scene.start('Controls')
+            this.scene.start('TutoPower')
         });
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(controlButton);
 
+        //Add interactions with the buttons - Go to credits scene
+        var botonCreditos = this.add.zone(640, 440, 280, 140);
+        botonCreditos.setOrigin(0);
+        botonCreditos.setInteractive();
+        botonCreditos.once('pointerdown', () => {
+            sonidoBoton.play();
+            if(activarMusica==true){
+                musicaFondo.play();
+            }
+            activarMusica = false;
+            this.scene.start('Creditos')
+        });
+        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(botonCreditos);
+
     }
 
+}
+
+///////////////////////////////////CREDITOS///////////////////////////////////
+class Creditos extends Phaser.Scene{
+    constructor() {
+		super({ key: 'Creditos' });
+	}
+
+    preload(){
+    }
+
+    create(){
+        
+        this.add.image(512, 320, 'pantallaCreditos');
+        this.add.image(510, 350, 'logo').setScale(0.2);
+
+        this.add.image(512, 320, 'autores');
+
+        //Add the buttons
+        this.add.sprite(840, 500, 'botonMP');
+
+         //Add interactions with the buttons - Go to play Scene
+         var playButton = this.add.zone(670, 420, 340, 160);
+         playButton.setOrigin(0);
+         playButton.setInteractive();
+         playButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            musicaFondo.stop();
+            activarMusica = true;
+             this.scene.start('MainScene')
+         });
+         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
+    }
 }
 
 ///////////////////////////////////PLAYER CHARACTER SELECTOR///////////////////////////////////
@@ -843,10 +891,10 @@ class PlayerSelector extends Phaser.Scene{
 }
 
 
-///////////////////////////////////CONTROLS SCENE///////////////////////////////////
-class Controls extends Phaser.Scene{
+///////////////////////////////////TUTO POWER///////////////////////////////////
+class TutoPower extends Phaser.Scene{
     constructor() {
-		super({ key: 'Controls' });
+		super({ key: 'TutoPower' });
 	}
 
     preload(){
@@ -854,7 +902,7 @@ class Controls extends Phaser.Scene{
 
     create(){ 
         //Add the background
-        this.add.image(512, 320, 'fondoControl');
+        this.add.image(512, 320, 'fondoTutoPower');
 
         //Add interactions with the buttons - Go back to Main Scene
         var backButton = this.add.zone(830, 500, 180, 90);
@@ -865,9 +913,116 @@ class Controls extends Phaser.Scene{
             this.scene.start('MainScene')
         });
        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoControles')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoVictoria')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
     }
 }
 
+///////////////////////////////////TUTO CONTROLES///////////////////////////////////
+class TutoControles extends Phaser.Scene{
+    constructor() {
+		super({ key: 'TutoControles' });
+	}
+
+    preload(){
+    }
+
+    create(){ 
+        //Add the background
+        this.add.image(512, 320, 'fondoTutoControles');
+
+        //Add interactions with the buttons - Go back to Main Scene
+        var backButton = this.add.zone(830, 500, 180, 90);
+        backButton.setOrigin(0);
+        backButton.setInteractive();
+        backButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('MainScene')
+        });
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoVictoria')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoPower')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+    }
+}
+
+///////////////////////////////////TUTO VICTORIA///////////////////////////////////
+class TutoVictoria extends Phaser.Scene{
+    constructor() {
+		super({ key: 'TutoVictoria' });
+	}
+
+    preload(){
+    }
+
+    create(){ 
+        //Add the background
+        this.add.image(512, 320, 'fondoTutoVictoria');
+
+        //Add interactions with the buttons - Go back to Main Scene
+        var backButton = this.add.zone(830, 500, 180, 90);
+        backButton.setOrigin(0);
+        backButton.setInteractive();
+        backButton.once('pointerdown', () => {
+            sonidoBoton.play();
+            this.scene.start('MainScene')
+        });
+       // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
+
+       
+       var flechaDerecha = this.add.zone(860, 265, 130, 140);
+       flechaDerecha.setOrigin(0);
+       flechaDerecha.setInteractive();
+       flechaDerecha.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoPower')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaDerecha);
+
+       var flechaIzquierda = this.add.zone(20, 265, 130, 140);
+       flechaIzquierda.setOrigin(0);
+       flechaIzquierda.setInteractive();
+       flechaIzquierda.once('pointerdown', () => {
+           sonidoBoton.play();
+           this.scene.start('TutoControles')
+       });
+       //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+    }
+}
 
 ///////////////////////////////////GAME SCENE///////////////////////////////////
 class GameScene extends Phaser.Scene{
@@ -1490,11 +1645,11 @@ class CreditsScene extends Phaser.Scene{
         this.add.image(510, 350, 'logo').setScale(0.2);
 
         if(resultado === 'j1'){
-            this.add.image(512, 160, 'victoriaJ1');
+            this.add.image(512, 160, 'victoriaJ1').setScale(0.2);
         }else if(resultado === 'j2'){
-            this.add.image(512, 160, 'victoriaJ2');
+            this.add.image(512, 160, 'victoriaJ2').setScale(0,3);
         }else if(resultado === 'empate'){
-            this.add.image(512, 160, 'empate');
+            this.add.image(512, 160, 'empate').setScale(0,3);
         }
 
         this.add.image(512, 320, 'autores');
@@ -1530,7 +1685,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [Preload, MainScene, Controls, PlayerSelector, GameScene, CreditsScene],
+    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, CreditsScene],
 };
 
 var game = new Phaser.Game(config);
