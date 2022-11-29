@@ -80,6 +80,8 @@ var cuentas3 = true;
 var textoCuenta;
 var textoCuenta2;
 var textoCuenta3;
+var musicaPersonajes;
+var reload = false;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -505,7 +507,6 @@ function drawClock (x, y, timer)
 }
 
 function cuenta1(){
-    musicaFondo.stop();
     if (cuentas1 == true){
         cuentas1 = false;
         console.log('El juego  comienza en: 3');
@@ -518,7 +519,6 @@ function cuenta1(){
 }
 
 function cuenta2(){
-    musicaFondo.stop();
     if (cuentas2 == true){
         cuentas2 = false;
         console.log('El juego  comienza en: 2');
@@ -528,9 +528,7 @@ function cuenta2(){
 }
 
 function cuenta3(){
-    musicaFondo.stop();
     if(cuentas3 == true){
-        musicaFondo.stop();
         cuentas3 = false;
         console.log('El juego  comienza en: 1');
         textoCuenta.setText('1');
@@ -543,25 +541,18 @@ class Preload extends Phaser.Scene{
 		super({ key: 'Preload' });
 	}
     preload() {
-        //Main
         this.load.image('fondoMain', 'assets/fondoPrincipal.png');
         this.load.audio('musicaFondo', 'assets/music/m_menú.mp3');
         this.load.audio('sonidoBoton', 'assets/SFX/efectoBoton.mp3');
         this.load.image('logo','assets/logo.png');
-
-        //Selector
         this.load.image('fondoCharacter', 'assets/fondoMenu.png');
         this.load.spritesheet('player1', 'assets/character1.png', { frameWidth: 32, frameHeight: 48});
         this.load.spritesheet('player2', 'assets/character2.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player3', 'assets/character3.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('player4', 'assets/character4.png', { frameWidth: 32, frameHeight: 48 });
-
-        //Controles
         this.load.image('fondoTutoVictoria', 'assets/fondoTutoVictoria.png');
         this.load.image('fondoTutoPower', 'assets/fondoTutoPower.png');
         this.load.image('fondoTutoControles', 'assets/fondoTutoControles.png');
-
-        //Juego
         this.load.image('sky', 'assets/fondo.png');
         this.load.image('ground', 'assets/platformP.png');
         this.load.spritesheet('SpritePlayer1', 'assets/player1.png', { frameWidth: 32, frameHeight: 48});
@@ -600,13 +591,12 @@ class Preload extends Phaser.Scene{
         this.load.audio('efectoRecolector', 'assets/SFX/efectoRecoger.mp3');
         this.load.image('pantallaCreditos', 'assets/pantallaCreditos.png');
         this.load.image('pausa', 'assets/pausa.png');
-        
-        //Creditos
         this.load.image('botonMP', 'assets/BotonMP.png');
         this.load.image('victoriaJ2', 'assets/victoriaJ1.png');
         this.load.image('victoriaJ1', 'assets/victoriaJ2.png');
         this.load.image('empate', 'assets/empate.png');
         this.load.image('autores', 'assets/Autores.png');
+        this.load.image('recarga', 'assets/recarga.png');
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -687,40 +677,13 @@ class MainScene extends Phaser.Scene{
     }
 
     create(){
-        musicaFondo = this.sound.add('musicaFondo', { loop: false });
-        sonidoBoton = this.sound.add('sonidoBoton', { loop: false });
-
+        musicaFondo = this.sound.add('musicaFondo', { loop: true });
+        sonidoBoton = this.sound.add('sonidoBoton', { loop: false });       
        
-       
-        this.input.on('pointerup', function (pointer) {
-
-            if (pointer.leftButtonReleased()&&activarMusica==true)
-            {
-                activarMusica = false;
-                musicaFondo.play();
-            }
-            else if (pointer.rightButtonReleased()&&activarMusica==true)
-            {
-                activarMusica = false;
-                musicaFondo.play();
-            }
-            else if (pointer.middleButtonReleased()&&activarMusica==true)
-            {
-                activarMusica = false;
-                musicaFondo.play();
-            }
-            else if (pointer.backButtonReleased()&&activarMusica==true)
-            {
-                activarMusica = false;
-                musicaFondo.play();
-            }
-            else if (pointer.forwardButtonReleased()&&activarMusica==true)
-            {
-                activarMusica = false;
-                musicaFondo.play();
-            }
-    
-        });
+        if(activarMusica == true){
+            musicaFondo.play();
+            activarMusica = false;
+        }
 
         //Add the background
         this.add.image(512, 320, 'fondoMain');
@@ -732,7 +695,6 @@ class MainScene extends Phaser.Scene{
         playButton.setInteractive();
         playButton.once('pointerdown', () => {
             sonidoBoton.play();
-            //this.scene.start('Player1Selector')
             if(activarMusica==true){
                 musicaFondo.play();
             }
@@ -751,6 +713,7 @@ class MainScene extends Phaser.Scene{
                 musicaFondo.play();
             }
             activarMusica = false;
+            
             this.scene.start('TutoPower')
         });
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(controlButton);
@@ -765,12 +728,11 @@ class MainScene extends Phaser.Scene{
                 musicaFondo.play();
             }
             activarMusica = false;
+            
             this.scene.start('Creditos')
         });
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(botonCreditos);
-
     }
-
 }
 
 ///////////////////////////////////CREDITOS///////////////////////////////////
@@ -798,6 +760,8 @@ class Creditos extends Phaser.Scene{
          playButton.setInteractive();
          playButton.once('pointerdown', () => {
             sonidoBoton.play();
+            musicaFondo.stop();
+            activarMusica = true;
             this.scene.start('MainScene')
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
@@ -818,6 +782,7 @@ class PlayerSelector extends Phaser.Scene{
         this.add.image(512, 320, 'fondoCharacter');
 
         //Add the characters
+        if(reload == false){
         SelP1 = this.add.sprite(100, 200, 'player1').setInteractive().setScale(3);
         SelP2 = this.add.sprite(300, 200, 'player2').setInteractive().setScale(3);
         SelP3 = this.add.sprite(500, 200, 'player3').setInteractive().setScale(3);
@@ -844,6 +809,11 @@ class PlayerSelector extends Phaser.Scene{
 
         ready1Text = this.add.text(270, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
         ready2Text = this.add.text(270, 65, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+        }
+
+        if (reload == true){
+            this.add.image(512, 320, 'recarga').setScale(0.25);
+        }
         
     }
     update (){    
@@ -923,7 +893,6 @@ class PlayerSelector extends Phaser.Scene{
 
         if(player2HasSelected == true && player1HasSelected == true){
            // this.time.delayedCall(3000, startGame, [], this); 
-           musicaFondo.stop();
            this.time.delayedCall(1000, cuenta1, [], this); 
         }
     }
@@ -948,6 +917,8 @@ class TutoPower extends Phaser.Scene{
         backButton.setInteractive();
         backButton.once('pointerdown', () => {
             sonidoBoton.play();
+            musicaFondo.stop();
+            activarMusica = true;
             this.scene.start('MainScene')
         });
        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
@@ -993,6 +964,8 @@ class TutoControles extends Phaser.Scene{
         backButton.setInteractive();
         backButton.once('pointerdown', () => {
             sonidoBoton.play();
+            musicaFondo.stop();
+            activarMusica = true;
             this.scene.start('MainScene')
         });
        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
@@ -1037,6 +1010,8 @@ class TutoVictoria extends Phaser.Scene{
         backButton.setInteractive();
         backButton.once('pointerdown', () => {
             sonidoBoton.play();
+            musicaFondo.stop();
+            activarMusica = true;
             this.scene.start('MainScene')
         });
        // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(backButton);
@@ -1868,6 +1843,7 @@ class CreditosFinales extends Phaser.Scene{
             sonidoBoton.play();
             musicaFondo.stop();
             activarMusica = true;
+            reload = true;
             this.scene.start('MainScene');
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
