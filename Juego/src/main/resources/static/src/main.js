@@ -83,6 +83,10 @@ var textoCuenta3;
 var musicaPersonajes;
 var reload = false;
 
+///////////////////////////////
+
+var textServer;
+
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
 function BulletPlayer1Hit(player2, player1Bullet){
@@ -687,7 +691,7 @@ class MainScene extends Phaser.Scene{
 
         //Add the background
         this.add.image(512, 320, 'fondoMain');
-        this.add.image(40, 600, 'logo').setScale(0.1);
+        this.add.image(40, 40, 'logo').setScale(0.1);
 
         //Add interactions with the buttons - Go to play Scene
         var playButton = this.add.zone(640, 100, 280, 140);
@@ -732,7 +736,44 @@ class MainScene extends Phaser.Scene{
             this.scene.start('Creditos')
         });
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(botonCreditos);
+        
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
     }
+    
+    update(){
+	    var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////CREDITOS///////////////////////////////////
@@ -753,7 +794,9 @@ class Creditos extends Phaser.Scene{
 
         //Add the buttons
         this.add.sprite(840, 500, 'botonMP');
-
+        
+        textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+        
          //Add interactions with the buttons - Go to play Scene
          var playButton = this.add.zone(670, 420, 340, 160);
          playButton.setOrigin(0);
@@ -766,6 +809,41 @@ class Creditos extends Phaser.Scene{
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
     }
+    
+    update(){
+	var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}   
 }
 
 ///////////////////////////////////PLAYER CHARACTER SELECTOR///////////////////////////////////
@@ -780,6 +858,8 @@ class PlayerSelector extends Phaser.Scene{
     create(){
         //Add the background
         this.add.image(512, 320, 'fondoCharacter');
+        
+        textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
 
         //Add the characters
         if(reload == false){
@@ -815,8 +895,42 @@ class PlayerSelector extends Phaser.Scene{
             this.add.image(512, 320, 'recarga').setScale(0.25);
         }
         
+        
     }
-    update (){    
+    
+    update (){
+	var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });    
        
         //Change color of characters
 		this.input.on('gameobjectover', function (pointer, gameObject) {
@@ -942,7 +1056,45 @@ class TutoPower extends Phaser.Scene{
            this.scene.start('TutoVictoria')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////TUTO CONTROLES///////////////////////////////////
@@ -988,7 +1140,45 @@ class TutoControles extends Phaser.Scene{
            this.scene.start('TutoPower')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////TUTO VICTORIA///////////////////////////////////
@@ -1034,7 +1224,45 @@ class TutoVictoria extends Phaser.Scene{
            this.scene.start('TutoControles')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////GAME SCENE///////////////////////////////////
@@ -1050,6 +1278,7 @@ class GameScene extends Phaser.Scene{
     }
 
     create () {
+		
         musicaJuego = this.sound.add('musicaJuego', { loop: true });
         musicaJuego.play();
 
@@ -1333,9 +1562,44 @@ class GameScene extends Phaser.Scene{
         //Colliders - Players with the platforms
         this.physics.add.collider(player1, platforms);   
         this.physics.add.collider(player2, platforms);
+        
+        textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
     }
 
-    update (){
+    update (){  
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+          
         graphics.clear();
         drawClock(512, 35, timerEvent1);
 
@@ -1680,7 +1944,45 @@ class Pausa extends Phaser.Scene{
             this.scene.stop();
          });
         // this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(reanudar);
+        
+        textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+        
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////TUTO POWER///////////////////////////////////
@@ -1725,7 +2027,45 @@ class TutoPowerPausa extends Phaser.Scene{
            this.scene.start('TutoVictoriaPausa')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////TUTO CONTROLES///////////////////////////////////
@@ -1769,7 +2109,45 @@ class TutoControlesPausa extends Phaser.Scene{
            this.scene.start('TutoPowerPausa')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////TUTO VICTORIA///////////////////////////////////
@@ -1813,7 +2191,45 @@ class TutoVictoriaPausa extends Phaser.Scene{
            this.scene.start('TutoControlesPausa')
        });
        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(flechaIzquierda);
+       
+       textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+       
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////FINAL CREDITS SCENE///////////////////////////////////
@@ -1847,7 +2263,44 @@ class CreditosFinales extends Phaser.Scene{
             this.scene.start('MainScene');
          });
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
+         
+         textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
     }
+    
+    update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                       console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                      console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                     console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                     console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                      console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////GAME CONFIG///////////////////////////////////
