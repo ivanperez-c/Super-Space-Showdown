@@ -67,6 +67,8 @@ var corazonesPlayer2;
 var balasPlayer1;
 var balasPlayer2;
 var noun;
+var noun1;
+var noun2;
 var musicaFondo;
 var activarMusica = true;
 var musicaJuego;
@@ -86,6 +88,11 @@ var reload = false;
 ///////////////////////////////
 
 var textServer;
+var nombres = [undefined, undefined];
+var nombre1;
+var nombre2;
+var chat = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+var mensajes;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -168,7 +175,7 @@ function endGameByTime() {
 //Add ammo to player 1
 function addAmmo1(player1, ammo){
     efectoRecolector.play();
-    console.log('ammo');
+   // console.log('ammo');
     ammo.destroy();
     player1Ammo = 5;
     balasPlayer1 = this.add.image(230,30,'municion5').setScale(0.1);
@@ -179,7 +186,7 @@ function addAmmo1(player1, ammo){
 //Add ammo to player 2
 function addAmmo2(player2, ammo){
     efectoRecolector.play();
-    console.log('ammo');
+  //  console.log('ammo');
     ammo.destroy();
     player2Ammo = 5;
     balasPlayer2 = this.add.image(800,30,'municion5').setScale(0.1);
@@ -191,7 +198,7 @@ function addAmmo2(player2, ammo){
 //Add health to player 1
 function addHealth1(player1, health){
     efectoRecolector.play();
-    console.log('health');
+  //  console.log('health');
     health.destroy();
     this.time.delayedCall(5000, generateObject, [], this);
     if(player1Life < 6){
@@ -218,7 +225,7 @@ function addHealth1(player1, health){
 //Add health to player 2
 function addHealth2(player2, health){
     efectoRecolector.play();
-    console.log('health');
+  //  console.log('health');
     health.destroy();
     this.time.delayedCall(5000, generateObject, [], this); 
     if(player2Life < 6){
@@ -246,7 +253,7 @@ function addHealth2(player2, health){
 //Add velocity to player 1
 function addVelocity1(player1, velocity){
     efectoRecolector.play();
-    console.log('velocity');
+  //  console.log('velocity');
     velocity.destroy();
     player1VelocityX = 320;
     player1VelocityY = 400;
@@ -257,7 +264,7 @@ function addVelocity1(player1, velocity){
 //Add velocity to player 2
 function addVelocity2(player2, velocity){
     efectoRecolector.play();
-    console.log('velocity');
+//    console.log('velocity');
     velocity.destroy();
     player2VelocityX = 320;
     player2VelocityY = 400;
@@ -269,7 +276,7 @@ function addVelocity2(player2, velocity){
 //Add damage to player 1
 function addDamage1(player1, damage){
     efectoRecolector.play();
-    console.log('damage');
+//    console.log('damage');
     damage.destroy();
     player1BulletDamage = 3;
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -278,7 +285,7 @@ function addDamage1(player1, damage){
 //Add damage to player 2
 function addDamage2(player2, damage){
     efectoRecolector.play();
-    console.log('damage');
+   // console.log('damage');
     damage.destroy();
     player2BulletDamage = 3;
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -288,7 +295,7 @@ function addDamage2(player2, damage){
 //Add slow to player 1
 function addSlow1(player1, slow){
     efectoRecolector.play();
-    console.log('slow');
+   // console.log('slow');
     slow.destroy();
     player2VelocityX = 80;
     player2VelocityY = 100;
@@ -299,7 +306,7 @@ function addSlow1(player1, slow){
 //Add slow to player 2
 function addSlow2(player2, slow){
     efectoRecolector.play();
-    console.log('slow');
+   // console.log('slow');
     slow.destroy();
     player1VelocityX = 80;
     player1VelocityY = 100;
@@ -311,7 +318,7 @@ function addSlow2(player2, slow){
 //Add big to player 1
 function addBig1(player1, big){
     efectoRecolector.play();
-    console.log('big');
+    //console.log('big');
     big.destroy();
     player2.setScale(2);
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -321,7 +328,7 @@ function addBig1(player1, big){
 //Add big to player 2
 function addBig2(player2, big){
     efectoRecolector.play();
-    console.log('big');
+   // console.log('big');
     big.destroy();
     player1.setScale(2);
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -332,7 +339,7 @@ function addBig2(player2, big){
 //Add small to player 1
 function addSmall1(player1, small){
     efectoRecolector.play();
-    console.log('small');
+   // console.log('small');
     small.destroy();
     player1.setScale(0.75);
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -342,7 +349,7 @@ function addSmall1(player1, small){
 //Add small to player 2
 function addSmall2(player2, small){
     efectoRecolector.play();
-    console.log('small');
+   // console.log('small');
     small.destroy();
     player2.setScale(0.75);
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -353,7 +360,7 @@ function addSmall2(player2, small){
 //Add point to player 1
 function addPoint1(player1, point){
     efectoRecolector.play();
-    console.log('point');
+  //  console.log('point');
     point.destroy();
     player1Score = player1Score + 1;
     player1ScoreText.setText(player1Score);
@@ -363,7 +370,7 @@ function addPoint1(player1, point){
 //Add point to player 2
 function addPoint2(player2, point){
     efectoRecolector.play();
-    console.log('point');
+ //   console.log('point');
     point.destroy();
     player2Score = player2Score + 1;
     player2ScoreText.setText(player2Score);
@@ -374,7 +381,7 @@ function addPoint2(player2, point){
 //Add cadence to player 1
 function addCadence1(player1, cadence){
     efectoRecolector.play();
-    console.log('cadence');
+ //   console.log('cadence');
     cadence.destroy();
     player1Cadence = 500;
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -384,7 +391,7 @@ function addCadence1(player1, cadence){
 //Add cadence to player 2
 function addCadence2(player2, cadence){
     efectoRecolector.play();
-    console.log('cadence');
+ //   console.log('cadence');
     cadence.destroy();
     player2Cadence = 500;
     this.time.delayedCall(5000, generateObject, [], this); 
@@ -513,10 +520,10 @@ function drawClock (x, y, timer)
 function cuenta1(){
     if (cuentas1 == true){
         cuentas1 = false;
-        console.log('El juego  comienza en: 3');
-        textoCuenta3 = this.add.text(820, 300, 'El juego', { fontFamily: 'essential', fontSize: '50px', fill: '#fff' });
-        textoCuenta2 = this.add.text(790, 350, 'comienza en:', { fontFamily: 'essential', fontSize: '50px', fill: '#fff' });
-        textoCuenta = this.add.text(880, 390, '3', { fontFamily: 'essential', fontSize: '100px', fill: '#fff' });
+    //    console.log('El juego  comienza en: 3');
+        textoCuenta3 = this.add.text(500, 50, 'El juego', { fontFamily: 'essential', fontSize: '40px', fill: '#fff' });
+        textoCuenta2 = this.add.text(470, 100, 'comienza en:', { fontFamily: 'essential', fontSize: '40px', fill: '#fff' });
+        textoCuenta = this.add.text(540, 140, '3', { fontFamily: 'essential', fontSize: '80px', fill: '#fff' });
         this.time.delayedCall(1000, cuenta2, [], this); 
     }
     
@@ -525,7 +532,7 @@ function cuenta1(){
 function cuenta2(){
     if (cuentas2 == true){
         cuentas2 = false;
-        console.log('El juego  comienza en: 2');
+    //    console.log('El juego  comienza en: 2');
         textoCuenta.setText('2');
         this.time.delayedCall(1000, cuenta3, [], this); 
     }
@@ -534,7 +541,7 @@ function cuenta2(){
 function cuenta3(){
     if(cuentas3 == true){
         cuentas3 = false;
-        console.log('El juego  comienza en: 1');
+     //   console.log('El juego  comienza en: 1');
         textoCuenta.setText('1');
         this.time.delayedCall(1000, startGame, [], this); 
     }
@@ -601,6 +608,9 @@ class Preload extends Phaser.Scene{
         this.load.image('empate', 'assets/empate.png');
         this.load.image('autores', 'assets/Autores.png');
         this.load.image('recarga', 'assets/recarga.png');
+        this.load.image('loginPlayer1', 'assets/LoginJ1.png');
+        this.load.image('loginPlayer2', 'assets/LoginJ2.png');
+        this.load.image('fondoChat', 'assets/fondoChat.png');
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -703,7 +713,7 @@ class MainScene extends Phaser.Scene{
                 musicaFondo.play();
             }
             activarMusica = false;
-            this.scene.start('PlayerSelector')
+            this.scene.start('RegistroJ1')
         });
         //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
 
@@ -751,24 +761,24 @@ class MainScene extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                     //  console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                    //  console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                   //  console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                  //   console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                  //    console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -821,29 +831,224 @@ class Creditos extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                   //    console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                   //   console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                  //   console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                  //   console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                    //  console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
           });
 	}   
+}
+
+///////////////////////////////////LOGIN PLAYER 1///////////////////////////////////
+class RegistroJ1 extends Phaser.Scene{
+	constructor() {
+		super({ key: 'RegistroJ1' });
+	}
+	
+	 preload(){
+    }
+    
+    create(){
+		this.add.image(512, 320, 'loginPlayer1');
+		
+		textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+	
+		var entradaTexto = this.add.text(70, 300, '', { fontFamily: 'Essential', fontSize: '100px', fill: '#000' });
+	
+		var continuarJ1 = this.add.zone(640, 440, 310, 135);
+        	continuarJ1.setOrigin(0);
+        	continuarJ1.setInteractive();
+        	continuarJ1.once('pointerdown', () => {
+            this.scene.start('RegistroJ2')
+        });
+        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(continuarJ1);
+        
+        this.input.keyboard.on('keydown', function (event) {
+
+            if (event.keyCode === 8 && entradaTexto.text.length > 0) {
+                entradaTexto.text = entradaTexto.text.substr(0, entradaTexto.text.length - 1);
+            }
+            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 92)) {
+                if (entradaTexto.text.length < 17){
+					entradaTexto.text += event.key;
+				} 
+            }
+        });
+        
+        //SE AÑADE UN USUARIO
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/usuarios",
+            data: JSON.stringify("--------- USUARIO ---------"),
+            dataType: "json",
+            processData: false
+        }).done(function (data) {
+            //console.log("POST USUARIO");
+        });
+        
+        continuarJ1.on('pointerdown', () => {
+            $.ajax({
+                type: "PUT",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "/usuarios",
+                data: JSON.stringify(entradaTexto.text),
+                dataType: "json",
+                processData: false
+            }).done(function (data) {
+                //console.log("PUT USUARIO");
+            });
+        });
+        
+	}
+	
+	update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                     //  console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                    //  console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                   //  console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                   //  console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                    //  console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
+}
+
+///////////////////////////////////LOGIN PLAYER 2///////////////////////////////////
+class RegistroJ2 extends Phaser.Scene{
+	constructor() {
+		super({ key: 'RegistroJ2' });
+	}
+	
+	 preload(){
+    }
+    
+    create(){
+		this.add.image(512, 320, 'loginPlayer2');
+		
+		textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+	
+		var entradaTexto = this.add.text(70, 300, '', { fontFamily: 'Essential', fontSize: '100px', fill: '#000' });
+	
+		var continuarJ2 = this.add.zone(640, 440, 310, 135);
+        	continuarJ2.setOrigin(0);
+        	continuarJ2.setInteractive();
+        	continuarJ2.once('pointerdown', () => {
+            this.scene.start('PlayerSelector')
+        });
+        //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(continuarJ1);
+        
+        this.input.keyboard.on('keydown', function (event) {
+
+            if (event.keyCode === 8 && entradaTexto.text.length > 0) {
+                entradaTexto.text = entradaTexto.text.substr(0, entradaTexto.text.length - 1);
+            }
+            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) {
+				if (entradaTexto.text.length < 17){
+							entradaTexto.text += event.key;
+				}   
+            }
+        });
+        
+        //SE AÑADE EL NOMBRE AL TXT
+        continuarJ2.once('pointerdown', () => {
+            $.ajax({
+                type: "PUT",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "/usuarios",
+                data: JSON.stringify(entradaTexto.text),
+                dataType: "json",
+                processData: false
+            }).done(function (data) {
+                //console.log("PUT USUARIO");
+            });
+        });
+	}
+	
+	update(){
+		var url = $(location).attr('href');
+		  
+		$.ajax({
+              timeout: 5000,
+              type: 'GET',
+              dataType: 'jsonp',
+              url: url,
+              cache: false,
+              "error":function(XMLHttpRequest,textStatus, errorThrown) {
+                  if(errorThrown == "timeout") {
+                    //console.log("Error con el servidor"); 
+                  }
+              },
+              statusCode: {
+                  404:function(){
+                    //console.log("Estado del Servidor: Página no encontrada " + url);
+                      textServer.setText("Estado del Servidor: Página no encontrada");
+                  },
+                  0:function(){
+                  	//  console.log("Estado del Servidor: Desconectado "+ url);
+                     textServer.setText("Estado del Servidor: Desconectado");
+                  },
+                  500:function(){
+                   //  console.log("Estado del Servidor: Error interno "+ url);
+                     textServer.setText("Estado del Servidor: Error interno ");
+                  },
+                  200:function(){
+                  //    console.log("Estado del Servidor: Conectado "+ url);
+                      textServer.setText("Estado del Servidor: Conectado ");
+                  }
+              }
+          });
+	}
 }
 
 ///////////////////////////////////PLAYER CHARACTER SELECTOR///////////////////////////////////
@@ -857,49 +1062,161 @@ class PlayerSelector extends Phaser.Scene{
 
     create(){
         //Add the background
-        this.add.image(512, 320, 'fondoCharacter');
+        this.add.image(512, 320, 'fondoChat');
         
         textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
 
         //Add the characters
         if(reload == false){
-        SelP1 = this.add.sprite(100, 200, 'player1').setInteractive().setScale(3);
-        SelP2 = this.add.sprite(300, 200, 'player2').setInteractive().setScale(3);
-        SelP3 = this.add.sprite(500, 200, 'player3').setInteractive().setScale(3);
-        SelP4 = this.add.sprite(700, 200, 'player4').setInteractive().setScale(3);
-        SelP5 = this.add.sprite(100, 470, 'player1').setInteractive().setScale(3);
-        SelP6 = this.add.sprite(300, 470, 'player2').setInteractive().setScale(3);
-        SelP7 = this.add.sprite(500, 470, 'player3').setInteractive().setScale(3);
-        SelP8 = this.add.sprite(700, 470, 'player4').setInteractive().setScale(3);
-
-        noun = this.add.text(55, 100, 'Jugador 1', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(55, 370, 'Jugador 2', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-
-        noun = this.add.text(50, 280, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(50, 550, 'DAVROS', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-
-        noun = this.add.text(270, 280, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(270, 550, 'EZRI', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-
-        noun = this.add.text(465, 280, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(465, 550, 'DUSKY', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-
-        noun = this.add.text(660, 280, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-        noun = this.add.text(660, 550, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '40px', fill: '#fff' });
-
-        ready1Text = this.add.text(270, 16, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
-        ready2Text = this.add.text(270, 65, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+	        SelP1 = this.add.sprite(100, 290, 'player1').setInteractive().setScale(2);
+	        SelP2 = this.add.sprite(220, 290, 'player2').setInteractive().setScale(2);
+	        SelP3 = this.add.sprite(340, 290, 'player3').setInteractive().setScale(2);
+	        SelP4 = this.add.sprite(460, 290, 'player4').setInteractive().setScale(2);
+	        SelP5 = this.add.sprite(100, 490, 'player1').setInteractive().setScale(2);
+	        SelP6 = this.add.sprite(220, 490, 'player2').setInteractive().setScale(2);
+	        SelP7 = this.add.sprite(340, 490, 'player3').setInteractive().setScale(2);
+	        SelP8 = this.add.sprite(460, 490, 'player4').setInteractive().setScale(2);
+	
+	       
+	
+	        noun = this.add.text(75, 350, 'DAVROS', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	        noun = this.add.text(75, 550, 'DAVROS', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	
+	        noun = this.add.text(205, 350, 'EZRI', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	        noun = this.add.text(205, 550, 'EZRI', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	
+	        noun = this.add.text(320, 350, 'DUSKY', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	        noun = this.add.text(320, 550, 'DUSKY', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	
+	        noun = this.add.text(435, 350, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	        noun = this.add.text(435, 550, 'ZAMASU', {  fontFamily: 'Essential', fontSize: '20px', fill: '#fff' });
+	        
+	        //OBTENEMOS LOS DOS ÚLTIMOS NOMBRES DEL TXT
+	        $.ajax({
+	            type: "GET",
+	            url: "/usuarios",
+	            dataType: "json",
+	        }).done(function (data) {
+				nombres[0] = data[data.length-2];
+				nombres[1] = data[data.length-1];
+				
+				nombres[0] = nombres[0].replaceAll("\"", " ");
+				nombres[1] = nombres[1].replaceAll("\"", " ");
+	
+	            //console.log("GET USUARIOS");
+	        });
+	
+	        ready1Text = this.add.text(55, 50, 'Jugador 1 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+	        ready2Text = this.add.text(55, 110, 'Jugador 2 pendiente de elegir personaje', {  fontFamily: 'Essential', fontSize: '37px', fill: '#fff' });
+	        
+	        noun1 = this.add.text(55, 200, 'Jugador 1 - ' + nombres[0], {  fontFamily: 'Essential', fontSize: '35px', fill: '#fff' });
+	        noun2 = this.add.text(55, 392, 'Jugador 2 - ' + nombres[1], {  fontFamily: 'Essential', fontSize: '35px', fill: '#fff' });
+	        
+	        var textoChat = this.add.text(687, 542, '', { fontFamily: 'Essential', fontSize: '35px', fill: '#000' });
+	        
+	        mensajes = this.add.text(705, 40, chat, {aling: 'center', fontFamily: 'Essential', fontSize: '35px', fill: '#000' });
+	        
+			this.input.keyboard.on('keydown', function (event) {
+		           if (event.keyCode === 8 && textoChat.text.length > 0) {
+		               textoChat.text = textoChat.text.substr(0, textoChat.text.length - 1);
+		           }
+		           else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) {
+						if (textoChat.text.length < 13){
+							textoChat.text += event.key;
+						}  		
+		           }
+		        });
+		 
+	        $.ajax({
+	            type: "POST",
+	            headers: {
+	                'Accept': 'application/json',
+	                'Content-Type': 'application/json'
+	            },
+	            url: "/chat",
+	            data: JSON.stringify("Chat de usuarios"),
+	            dataType: "json",
+	            processData: false
+	        }).done(function (data) {
+	            //console.log("POST CHAT");
+	        });
+	        
+	        var enviar = this.add.zone(914, 530, 103, 50);
+        	enviar.setOrigin(0);
+        	enviar.setInteractive();
+        	//this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(enviar);
+	        enviar.on('pointerdown', () => {
+	            $.ajax({
+	                type: "PUT",
+	                headers: {
+	                    'Accept': 'application/json',
+	                    'Content-Type': 'application/json'
+	                },
+	                url: "/chat",
+	                data: JSON.stringify(textoChat.text),
+	                dataType: "json",
+	                processData: false
+	            }).done(function (data) {
+	                //console.log("PUT CHAT");
+	                textoChat.setText('');
+	            });
+        	});
+        
+        
         }
 
         if (reload == true){
             this.add.image(512, 320, 'recarga').setScale(0.25);
-        }
-        
-        
+        }     
     }
     
     update (){
-	var url = $(location).attr('href');
+		noun1.setText('Jugador 1 - ' + nombres[0]);
+		noun2.setText('Jugador 2 - ' + nombres[1]);
+		
+		$.ajax({
+            type: "GET",
+            url: "/chat",
+            dataType: "json",
+        }).done(function (data) {
+            
+            //chat[0] = data[data.length];
+            chat[1] = data[data.length - 10];
+            chat[2] = data[data.length - 9];
+            chat[3] = data[data.length - 8];
+            chat[4] = data[data.length - 7];
+            chat[5] = data[data.length - 6];
+            chat[6] = data[data.length - 5];
+            chat[7] = data[data.length - 4];
+            chat[8] = data[data.length - 3];
+            chat[9] = data[data.length - 2];
+            chat[10] = data[data.length - 1];
+            
+            try{
+				chat[10] = chat[10].replaceAll("\"", " ");
+	            chat[9] = chat[9].replaceAll("\"", " ");
+	            chat[8] = chat[8].replaceAll("\"", " ");
+	            chat[7] = chat[7].replaceAll("\"", " ");
+	            chat[6] = chat[6].replaceAll("\"", " ");
+	            chat[5] = chat[5].replaceAll("\"", " ");
+	            chat[4] = chat[4].replaceAll("\"", " ");
+	            chat[3] = chat[3].replaceAll("\"", " ");
+	            chat[2] = chat[2].replaceAll("\"", " ");
+	            chat[1] = chat[1].replaceAll("\"", " ");
+			}catch{
+				
+			}
+            
+            //console.log(chat);
+            //console.log(chat.length);
+            //console.log(data.length);
+            //console.log("GET CHAT");
+            mensajes.setText(chat);
+        });
+       
+        mensajes.setText(chat);
+         
+		var url = $(location).attr('href');
 		  
 		$.ajax({
               timeout: 5000,
@@ -909,42 +1226,47 @@ class PlayerSelector extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                       //console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                     // console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                    // console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                   //  console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                   //   console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
           });    
        
-        //Change color of characters
-		this.input.on('gameobjectover', function (pointer, gameObject) {
-			gameObject.setTint(0x00ff00);
-		});
-
-		this.input.on('gameobjectout', function (pointer, gameObject) {
-			if (gameObject.input.isDown) {
-				gameObject.setTint(0xff0000);
-			}
-			else {
-				gameObject.clearTint();
-			}
-		});
+        try{
+			//Change color of characters
+			this.input.on('gameobjectover', function (pointer, gameObject) {
+				gameObject.setTint(0x00ff00);
+			});
+	
+			this.input.on('gameobjectout', function (pointer, gameObject) {
+				if (gameObject.input.isDown) {
+					gameObject.setTint(0xff0000);
+				}
+				else {
+					gameObject.clearTint();
+				}
+			});
+		}catch{
+			
+		}
+        
 
         //Player 1 choice
         SelP1.on('pointerdown', function (pointer) {
@@ -1072,24 +1394,24 @@ class TutoPower extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                    //   console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                   //   console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                   //  console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                   //  console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                   //   console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -1156,24 +1478,24 @@ class TutoControles extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                    //   console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                    //  console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                   //  console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                    // console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                    //  console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -1240,24 +1562,24 @@ class TutoVictoria extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                     //  console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                    //  console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                   //  console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                  //   console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                   //   console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -1564,9 +1886,43 @@ class GameScene extends Phaser.Scene{
         this.physics.add.collider(player2, platforms);
         
         textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+        
+         $.ajax({
+            type: "GET",
+            url: "/usuarios",
+            dataType: "json",
+        }).done(function (data) {
+			nombres[0] = data[data.length-2];
+			nombres[1] = data[data.length-1];
+			
+			nombres[0] = nombres[0].replaceAll("\"", " ");
+			nombres[1] = nombres[1].replaceAll("\"", " ");
+
+            //console.log("GET USUARIOS");
+        });
+        
+        nombre1 = this.add.text(30, 30, nombres[0], {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+        nombre2 = this.add.text(30, 30, nombres[1], {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+        
+        //BORRADO DE USUARIO DEL TXT
+        $.ajax({
+            type: "DELETE",
+            url: "/chat",
+            dataType: "json",
+        }).done(function (data) {
+            //console.log("DELETE CHAT");
+        });
+        
     }
 
     update (){  
+		//nombre1.setText(nombres[0]);
+		nombre1.x = player1.body.x;
+		nombre1.y = player1.body.y - 10;
+		//nombre2.setText(nombres[1]);
+		nombre2.x = player2.body.x;
+		nombre2.y = player2.body.y - 10;
+
 		var url = $(location).attr('href');
 		  
 		$.ajax({
@@ -1577,24 +1933,24 @@ class GameScene extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                    //   console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                   //   console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                //     console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                   //  console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                   //   console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -1843,7 +2199,7 @@ class GameScene extends Phaser.Scene{
             createObject = false;
             randomNumber = Phaser.Math.FloatBetween(0, 10);
             //randomNumber = 2;
-            console.log(randomNumber);
+          //  console.log(randomNumber);
             if (randomNumber >= 0 && randomNumber <= 2){ //Generate Health
                 health = this.physics.add.image(Phaser.Math.FloatBetween(0, 1024), Phaser.Math.FloatBetween(0, 640), 'health').setScale(0.8);
                 health.setCollideWorldBounds(true)
@@ -1960,24 +2316,24 @@ class Pausa extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                    //   console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                   //   console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                  //   console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                  //   console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                  //    console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -2043,24 +2399,24 @@ class TutoPowerPausa extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                 //      console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                   //   console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                  //   console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                 //    console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                    //  console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -2125,24 +2481,24 @@ class TutoControlesPausa extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                  //     console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                 //     console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                 //    console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                //     console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                //      console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -2207,24 +2563,24 @@ class TutoVictoriaPausa extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                 //      console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                  //    console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                 //    console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                //     console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+               //       console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -2265,6 +2621,15 @@ class CreditosFinales extends Phaser.Scene{
          //this.add.graphics().lineStyle(2,0x00ff0c).strokeRectShape(playButton);
          
          textServer = this.add.text(20, 605, '', {  fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
+         
+        //BORRADO DE USUARIO DEL TXT
+        $.ajax({
+            type: "DELETE",
+            url: "/usuarios",
+            dataType: "json",
+        }).done(function (data) {
+            //console.log("DELETE USUARIO");
+        });
     }
     
     update(){
@@ -2278,24 +2643,24 @@ class CreditosFinales extends Phaser.Scene{
               cache: false,
               "error":function(XMLHttpRequest,textStatus, errorThrown) {
                   if(errorThrown == "timeout") {
-                       console.log("Error con el servidor"); 
+                  //     console.log("Error con el servidor"); 
                   }
               },
               statusCode: {
                   404:function(){
-                      console.log("Estado del Servidor: Página no encontrada " + url);
+                  //    console.log("Estado del Servidor: Página no encontrada " + url);
                       textServer.setText("Estado del Servidor: Página no encontrada");
                   },
                   0:function(){
-                     console.log("Estado del Servidor: Desconectado "+ url);
+                  //   console.log("Estado del Servidor: Desconectado "+ url);
                      textServer.setText("Estado del Servidor: Desconectado");
                   },
                   500:function(){
-                     console.log("Estado del Servidor: Error interno "+ url);
+                  //   console.log("Estado del Servidor: Error interno "+ url);
                      textServer.setText("Estado del Servidor: Error interno ");
                   },
                   200:function(){
-                      console.log("Estado del Servidor: Conectado "+ url);
+                //      console.log("Estado del Servidor: Conectado "+ url);
                       textServer.setText("Estado del Servidor: Conectado ");
                   }
               }
@@ -2316,7 +2681,7 @@ var config = {
         }
     },
     parent: 'phaser-example',
-    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, PlayerSelector, Creditos, GameScene, TutoVictoriaPausa, TutoPowerPausa, TutoControlesPausa ,Pausa, CreditosFinales],
+    scene: [Preload, MainScene, TutoVictoria, TutoPower, TutoControles, RegistroJ1, RegistroJ2, PlayerSelector, Creditos, GameScene, TutoVictoriaPausa, TutoPowerPausa, TutoControlesPausa ,Pausa, CreditosFinales],
 };
 
 var game = new Phaser.Game(config);

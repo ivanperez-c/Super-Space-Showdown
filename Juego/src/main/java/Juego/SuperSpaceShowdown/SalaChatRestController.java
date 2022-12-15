@@ -30,6 +30,7 @@ public class SalaChatRestController {
 
 		bw.write(startMessage + "\n");
 		bw.close();
+		
 
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
@@ -40,9 +41,8 @@ public class SalaChatRestController {
 			Path path = Paths.get("chat/", "registroChat.txt");
 			chat.setMensajes(Files.readAllLines(path, Charset.defaultCharset()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-
 		return chat.getMensajes();
 	}
 
@@ -62,7 +62,7 @@ public class SalaChatRestController {
 				linea.close();
 				escribir.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		} else {
@@ -73,10 +73,20 @@ public class SalaChatRestController {
 				linea.close();
 				escribir.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
+	
+	@DeleteMapping
+	public ResponseEntity<Boolean> borrarChat() throws IOException {
+		String ruta = "chat/registroChat.txt";
+		File file = new File(ruta);
+
+		file.delete();
+		return new ResponseEntity<>(true, HttpStatus.CREATED);
+	}
+	
 }
