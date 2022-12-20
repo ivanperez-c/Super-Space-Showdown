@@ -47,6 +47,8 @@
     * ii. EZRI
     * iii. DUSKY
     * iv. ZAMASU
+* 5.**API REST** 
+* 6.**Instrucciones para la ejecución del juego** 
 
 
 &nbsp;
@@ -214,10 +216,20 @@ Pantalla de menú principal, desde la cual se podrá acceder a la pantalla de ju
   <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen13.png" alt="JuveR" width="500px">
 </p>
 
+Pantallas de login para los usuarios, desde la cual cada usuario podrá ingresar un nombre que le identifique durante la partida.
+
+<p align="center">
+  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen26.PNG" alt="JuveR" width="500px">
+</p>
+
+<p align="center">
+  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen27.PNG" alt="JuveR" width="500px">
+</p>
+
 Pantalla de selección de personajes, cada jugador ha de elegir con qué personaje quiere jugar, tras elegir los dos jugadores comienza una cuenta atrás de tres segundos y comienza el juego.
 
 <p align="center">
-  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen14.png" alt="JuveR" width="500px">
+  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen28.PNG" alt="JuveR" width="500px">
 </p>
 
 Pantalla de juego, en la cual el jugador interactúa con todos los elementos de esta y disfruta de la partida.
@@ -296,3 +308,25 @@ El estilo visual del videojuego será de personajes chibi (personajes con cuerpo
 </p>
 
 
+# 5. API REST
+Para la creación de la API REST en el lenguaje de programación Java, se ha empleado el IDE Eclipse.
+
+La API contiene:
+
+- Una clase salaChat con su respectivo salaChatRestController, en las cuales se definen constructores, getters y setters, y los métodos GET, PUT, DELETE y POST respectivamente para el correcto funcionamiento de un chat que permite la comunicación entre usuarios. 
+
+- Una clase username con su respectivo usernameRestController, en las cuales se definen constructores, getters y setters, y los métodos GET, PUT, DELETE y POST respectivamente para permitir a cada usuario seleccionar un nombre que le identifique para jugar la partida. 
+
+<p align="center">
+  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/api.png" alt="JuveR" width="500px">
+</p>
+
+
+# 6. Instrucciones para la ejecución del juego
+Para ejecutar la aplicación hay que seguir los siguientes pasos:
+
+1- Levantar el servidor: para ello será necesario estar en posesión del proyecto, importarlo y ejecutarlo en Eclipse.
+
+2- Acceder al navegador para poder jugar, preferiblemente Google Chrome.
+
+3- Acceder a la dirección IP de la máquina que ha levantado el servidor, accediendo al puerto 8080 por defecto o al puerto específico configurado por la máquina.
