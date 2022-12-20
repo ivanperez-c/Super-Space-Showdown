@@ -77,6 +77,38 @@ public class SalaChatRestController {
 			}
 		}
 
+		File archivoCompleto;
+		FileWriter escribirCompleto;
+		PrintWriter lineaCompleto;
+
+		archivoCompleto = new File("chat/ChatCompleto.txt");
+		if(!archivoCompleto.exists()){
+			try{
+				archivoCompleto.createNewFile();
+				escribirCompleto = new FileWriter (archivoCompleto,true);
+				lineaCompleto= new PrintWriter(escribirCompleto);
+				//escribimos ene el arc
+				lineaCompleto.println(newMessage);
+				lineaCompleto.close();
+				escribirCompleto.close();
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+
+
+		}else {
+			try{
+			    escribirCompleto = new FileWriter (archivoCompleto,true);
+			    lineaCompleto= new PrintWriter(escribirCompleto);
+			    //escribimos ene el arc
+			    lineaCompleto.println(newMessage);
+			    lineaCompleto.close();
+			    escribirCompleto.close();
+			}catch (IOException e){
+			    e.printStackTrace();
+			}
+		}
+		
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
 	

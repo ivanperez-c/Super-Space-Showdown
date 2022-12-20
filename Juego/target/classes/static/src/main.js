@@ -82,14 +82,22 @@ var musicaPersonajes;
 var reload = false;
 
 ///////////////////////////////
-
 var textServer;
+/*
 var nombres = [undefined, undefined];
 var nombre1;
 var nombre2;
 var chat = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 var mensajes;
-var botonEnviar;
+var botonEnviar;*/
+
+var chat = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+var textoChat;
+var enviar = true;
+
+var nombres = [undefined, undefined];
+var nombre1;
+var nombre2;
 
 ///////////////////////////////////EXTERNAL FUNCTIONS///////////////////////////////////
 //Player 1 bullets hits on player 2
@@ -576,7 +584,7 @@ class Preload extends Phaser.Scene {
         this.load.image('recarga', 'assets/recarga.png');
         this.load.image('loginPlayer1', 'assets/LoginJ1.png');
         this.load.image('loginPlayer2', 'assets/LoginJ2.png');
-        this.load.image('fondoChat', 'assets/fondoChat.png');
+        this.load.image('fondoChat', 'assets/FondoChat.png');
         this.load.image('enviar', 'assets/enviar.png');
 
         var progressBar = this.add.graphics();
@@ -1008,7 +1016,7 @@ class PlayerSelector extends Phaser.Scene {
     }
 
     create() {
-        botonEnviar = this.add.image(968, 555, 'enviar').setInteractive();
+       // botonEnviar = this.add.image(968, 555, 'enviar').setInteractive();
         this.add.image(512, 320, 'fondoChat');
 
         textServer = this.add.text(20, 605, '', { fontFamily: 'Essential', fontSize: '22px', fill: '#fff' });
@@ -1053,11 +1061,11 @@ class PlayerSelector extends Phaser.Scene {
             noun1 = this.add.text(55, 200, 'Jugador 1 - ' + nombres[0], { fontFamily: 'Essential', fontSize: '35px', fill: '#fff' });
             noun2 = this.add.text(55, 392, 'Jugador 2 - ' + nombres[1], { fontFamily: 'Essential', fontSize: '35px', fill: '#fff' });
 
-            var textoChat = this.add.text(687, 542, '', { fontFamily: 'Essential', fontSize: '35px', fill: '#000' });
+           // var textoChat = this.add.text(687, 542, '', { fontFamily: 'Essential', fontSize: '35px', fill: '#000' });
 
-            mensajes = this.add.text(705, 40, chat, { aling: 'center', fontFamily: 'Essential', fontSize: '35px', fill: '#000' });
+            textoChat = this.add.text(705, 130, chat, { aling: 'center', fontFamily: 'Essential', fontSize: '30px', fill: '#000' });
 
-            this.input.keyboard.on('keydown', function (event) {
+           /* this.input.keyboard.on('keydown', function (event) {
                 if (event.keyCode === 8 && textoChat.text.length > 0) {
                     textoChat.text = textoChat.text.substr(0, textoChat.text.length - 1);
                 }
@@ -1066,7 +1074,7 @@ class PlayerSelector extends Phaser.Scene {
                         textoChat.text += event.key;
                     }
                 }
-            });
+            });*/
 
             $.ajax({
                 type: "POST",
@@ -1075,14 +1083,14 @@ class PlayerSelector extends Phaser.Scene {
                     'Content-Type': 'application/json'
                 },
                 url: "/chat",
-                data: JSON.stringify("--- Chat de usuarios ---"),
+                data: JSON.stringify("-Chat de usuarios-"),
                 dataType: "json",
                 processData: false
             }).done(function (data) {
             });
 
 
-            botonEnviar.on('pointerdown', () => {
+           /* botonEnviar.on('pointerdown', () => {
                 if (textoChat.text.length >= 1) {
 					sonidoBoton.play();
                     $.ajax({
@@ -1099,7 +1107,7 @@ class PlayerSelector extends Phaser.Scene {
                         textoChat.setText('');
                     });
                 }
-            });
+            });*/
         }
 
         if (reload == true) {
@@ -1110,26 +1118,55 @@ class PlayerSelector extends Phaser.Scene {
     update() {
         noun1.setText('Jugador 1 - ' + nombres[0]);
         noun2.setText('Jugador 2 - ' + nombres[1]);
+        
+        $("#value-input").click(function () {
+            console.log("pausa");
 
+            enviar = true;
+        })
+        
+        $("#add-button").click(function () {
+            if (enviar === true) {
+                enviar = false;
+                console.log("no pausa");
+                var value = $('#value-input').val();
+                $.ajax({
+                    type: "PUT",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: "/chat",
+                    data: JSON.stringify(value),
+                    dataType: "json",
+                    processData: false
+                }).done(function (data) {
+                    console.log("PUT CHAT");
+                });
+                $('#value-input').val('');
+            }
+        })
+        
         $.ajax({
             type: "GET",
             url: "/chat",
             dataType: "json",
         }).done(function (data) {
-            chat[1] = data[data.length - 10];
-            chat[2] = data[data.length - 9];
-            chat[3] = data[data.length - 8];
-            chat[4] = data[data.length - 7];
-            chat[5] = data[data.length - 6];
-            chat[6] = data[data.length - 5];
-            chat[7] = data[data.length - 4];
-            chat[8] = data[data.length - 3];
-            chat[9] = data[data.length - 2];
-            chat[10] = data[data.length - 1];
-
-            try {
-                chat[10] = chat[10].replaceAll("\"", " ");
-                chat[9] = chat[9].replaceAll("\"", " ");
+            chat[0] = undefined;
+            chat[1] = data[data.length - 8];
+            chat[2] = data[data.length - 7];
+            chat[3] = data[data.length - 6];
+            chat[4] = data[data.length - 5];
+            chat[5] = data[data.length - 4];
+            chat[6] = data[data.length - 3];
+            chat[7] = data[data.length - 2];
+            chat[8] = data[data.length - 1];
+            console.log(chat);
+            console.log(chat.length);
+            console.log(data.length);
+            console.log("GET CHAT");
+            
+             try {
                 chat[8] = chat[8].replaceAll("\"", " ");
                 chat[7] = chat[7].replaceAll("\"", " ");
                 chat[6] = chat[6].replaceAll("\"", " ");
@@ -1141,10 +1178,9 @@ class PlayerSelector extends Phaser.Scene {
             } catch {
 
             }
-            mensajes.setText(chat);
         });
-
-        mensajes.setText(chat);
+        
+        textoChat.setText(chat);
 
         var url = $(location).attr('href');
 
