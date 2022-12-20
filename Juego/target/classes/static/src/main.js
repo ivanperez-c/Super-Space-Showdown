@@ -649,10 +649,10 @@ class Preload extends Phaser.Scene {
             assetText.destroy();
         });
 
-        this.load.image('logo');
+      /*  this.load.image('algo');
         for (var i = 0; i < 1; i++) {
-            this.load.image('logo' + i);
-        }
+            this.load.image('algo' + i);
+        }*/
     }
 
     create() {
@@ -729,15 +729,9 @@ class MainScene extends Phaser.Scene {
         var url = $(location).attr('href');
 
         $.ajax({
-            timeout: 5000,
             type: 'GET',
             dataType: 'jsonp',
             url: url,
-            cache: false,
-            "error": function (XMLHttpRequest, textStatus, errorThrown) {
-                if (errorThrown == "timeout") {
-                }
-            },
             statusCode: {
                 404: function () {
                     textServer.setText("Estado del Servidor: Página no encontrada");
