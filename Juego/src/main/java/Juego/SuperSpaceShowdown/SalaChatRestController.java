@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/chat")
 public class SalaChatRestController {
-
+	
 	@Autowired
 	private SalaChat chat;
-
+	
 	@PostMapping
 	public ResponseEntity<Boolean> crearChat(@RequestBody String startMessage) throws IOException {
 		String ruta = "chat/registroChat.txt";
@@ -34,7 +34,7 @@ public class SalaChatRestController {
 
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
-
+	
 	@GetMapping
 	public List<String> getChat() {
 		try {
@@ -45,7 +45,7 @@ public class SalaChatRestController {
 		}
 		return chat.getMensajes();
 	}
-
+	
 	@PutMapping
 	public ResponseEntity<Boolean> newMenssage(@RequestBody String newMessage) {
 		File archivo;
