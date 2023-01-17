@@ -48,8 +48,9 @@
     * iii. DUSKY
     * iv. ZAMASU
 * 5.**API REST** 
-* 6.**Instrucciones para la ejecución del juego** 
-
+* 6.**Comunicación por WebSockets** 
+* 7.**Instrucciones para la ejecución del juego** 
+* 8.**Video de explicación y gameplay** 
 
 &nbsp;
 
@@ -322,11 +323,47 @@ La API contiene:
 </p>
 
 
-# 6. Instrucciones para la ejecución del juego
-Para ejecutar la aplicación hay que seguir los siguientes pasos:
+# 6. Comunicación por Websockets
+El diagrama de clases teniendo en cuenta la clase Manejador para los WebSockets:
 
-1- Levantar el servidor: para ello será necesario estar en posesión del proyecto, importarlo y ejecutarlo en Eclipse.
+<p align="center">
+  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/api2.png" alt="JuveR" width="500px">
+</p>
 
-2- Acceder al navegador para poder jugar, preferiblemente Google Chrome.
+El cliente comunica al servidor:
 
-3- Acceder a la dirección IP de la máquina que ha levantado el servidor, accediendo al puerto 8080 por defecto o al puerto específico configurado por la máquina.
+- Cuándo está listo para empezar a jugar
+- La posición del jugador
+- La animación del jugador
+- La posición de sus balas
+- La cantidad de munición restante
+- La cantidad de puntos obtenida
+- El tiempo restante de partida
+- La posición de la recarga de munición
+- El número aleatorio que determina el powerUp que aparece
+- La posición del powerUp
+
+Clase Manejador: WebsocketZakanHandlet:
+
+La clase manejador implementada tiene una tabla Hash en la que se guardan todas las sesiones que se unen al servidor.
+
+La clase tiene las siguientes funciones:
+
+- afterConnectionEstablished(): Asigna un orden a los usuarios cuando se conectan. Se le asigna un 1 al primer usuario y un 0 al segundo.
+- afterConnectionClosed(): Se invoca cuando un usuario se desconecta. Se imprime por pantalla y se borra de la lista de sesiones.
+- handleTextMessage(): Recibe un mensaje JSON (que contiene los cambios en el juego) y lo mapea. Despues llama al método enviarInfo()
+- enviarInfo(): Manda a todas las sesiones de la lista la información que recibe.
+
+# 7. Instrucciones para la ejecución del juego
+Primero es necesario levantar el servidor:
+- Descargar el proyecto
+- Importarlo con Eclipse o con Spring Tool Suite (opción Existing Maven Project)
+- Ejecutarlo como SpringApplication (desde el fichero App.java)
+
+Acceder al servidor desde un cliente:
+- El cliente será un navegador de la misma máquina que ha levantado el servidor o de otra.
+- El navegador preferiblemente será Google Chrome.
+- Buscar la dirección IP de la máquina que ha levantado el servidor en el puerto 8080.
+
+¡Jugar!
+
