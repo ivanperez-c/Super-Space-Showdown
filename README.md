@@ -367,3 +367,7 @@ Acceder al servidor desde un cliente:
 
 ¡Jugar!
 
+
+# 8. Video de explicación y gameplay
+
+https://youtu.be/xCREzOMQR4U
