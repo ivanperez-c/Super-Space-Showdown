@@ -343,7 +343,7 @@ El cliente comunica al servidor:
 - El número aleatorio que determina el powerUp que aparece
 - La posición del powerUp
 
-Clase Manejador: WebsocketZakanHandlet:
+Clase Manejador: WebsocketSuperSpaceShowdownHandler
 
 La clase manejador implementada tiene una tabla Hash en la que se guardan todas las sesiones que se unen al servidor.
 
