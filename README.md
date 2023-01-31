@@ -1,20 +1,7 @@
 # Super Space Showdown
 
-<p align="center">
-  <img src="https://github.com/ivanperez-c/Super-Space-Showdown/blob/main/Imagenes%20GDD/Imagen2.png" alt="JuveR" width="300px">
-</p>
-
-# Pixel Perfect
-
 **Descripción del  juego**: Juego de plataformas jugador contra jugador en el que cada jugador controla un personaje que utiliza armas y objetos que encuentra por el escenario para intentar acabar con su rival.
 
-**Autores**: Grupo 10 - Pixel Perfect
- - Iván Pérez Ciruelos, i.perezc.2019@alumnos.urjc.es, ivanperez-c
- - Adrian Mira García, a.mira.2019@alumnos.urjc.es, AdrianMira
- - Juan Gradolph Andrés, j.gradolph.2019@alumnos.urjc.es, GradolphJ
- - Carlos Garrido Guerrero, c.garrido.2020@alumnos.urjc.es, 
- - Pablo Burgaleta de la Peña, p.burgaleta.2019@alumnos.urjc.es, PBurgaleta
- 
  **Grado**: Diseño y desarrollo de videojuegos
  
  **Asignatura**: Juegos en Red
