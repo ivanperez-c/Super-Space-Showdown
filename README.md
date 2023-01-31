@@ -38,6 +38,7 @@
 * 6.**Comunicación por WebSockets** 
 * 7.**Instrucciones para la ejecución del juego** 
 * 8.**Video de explicación y gameplay** 
+* 9.**Enlace a itch.io** 
 
 &nbsp;
 
@@ -354,7 +355,10 @@ Acceder al servidor desde un cliente:
 
 ¡Jugar!
 
-
 # 8. Video de explicación y gameplay
 
 https://youtu.be/xCREzOMQR4U
+
+# 9. Enlace a itch.io
+
+https://ivanperez-c.itch.io/super-space-showdown
